@@ -1,94 +1,126 @@
-import Item from "../models/itemSell"
-const ITEMS = {
-    Marvel:[
-      new Item (
-        '1',
-        'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSL5yxzKrkpFXSP0l6G8zFzhu_vn9um8vmdn2cwWHEYaX05cnHhi0IyX8PS3iN13S2smMZLgplPViY&usqp=CAc',
-        'Guanto IronMan',
-        'costruzione',
-        '59,99€'
-    ),
-    new Item (
-        '2',
-        'https://m.media-amazon.com/images/I/91Q-n5PzkDL._AC_SX679_.jpg',
-        'Baby groot',
-        'costruzione',
-        '49,99€',
-    ),
-    new Item (
-        '3',
-        'https://www.emp-online.it/dw/image/v2/BBQV_PRD/on/demandware.static/-/Sites-master-emp/default/dw16f3519e/images/4/4/3/6/443641a.jpg?sfrm=png',
-        'Felpa',
-        'Abbigliamento',
-        '54,99€'
-    ),
-    new Item (
-        '4',
-        'https://m.media-amazon.com/images/I/81gzsFn-mZL._AC_SL1500_.jpg',
-        'guanto del infinito',
-        'costruzione',
-        '69,99€'
-    ),
-    new Item (
-        '5',
-        'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS9BSF37RslG0G-Wx6LOUdWsiNRbvjt-DX-qTWRJZwKa1g95Iwl4eGDe96P5Bnc729D3Q3PNiNLJQ&usqp=CAc',
-        'T-shirt',
-        'Abbigliamento',
-        '19,99€'
-    ),
-    new Item (
-        '6',
-        'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQmgP6n63Z669F8DPtPLtf7A_Whjdj0jrVECJVz7LF7Drx1X9kfMWI3zxAma83s7AZL784U1KEAMA&usqp=CAc',
-        'Action figure SpiderMan',
-        'Decoro',
-        '49,99€'
-    ),
-    new Item (
-        '7',
-        'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSOVjMbqHcS5BFnFNkyVmF3d_fDPpuYdgOMsxJmDmo8vtqws_U_psIZxsRw6GP5H3p1PFcMWzMskQBa2pbF0FEZeD4eN-wSK7YwvcrH6rXaUsVMBL150mC0&usqp=CAc',
-        'Quadro',
-        'Decoro',
-        '69,99€'
-    ),
-    new Item (
-        '8',
-        'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRCP2ZeLKJpS4b3hvEsqvcVUggGuRY3du-J4RDEpayJbGnUlQF9WbFdte5KZFwraQl-lC6XsA17WA&usqp=CAc',
-        'Martello di Thor',
-        'costruzione',
-        '119,99€'
-    ),  
-    ],
-    Roleplay:[
-        new Item (
-            '8',
-            'https://m.media-amazon.com/images/I/81gzsFn-mZL._AC_SL1500_.jpg',
-            'guanto del infinito',
-            'costruzione',
+import Item from '../models/itemSell';
+const ITEMS = [
+  new Item(
+    '1',
+    'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSL5yxzKrkpFXSP0l6G8zFzhu_vn9um8vmdn2cwWHEYaX05cnHhi0IyX8PS3iN13S2smMZLgplPViY&usqp=CAc',
+    'Guanto IronMan',
+    'costruzione',
+    '59,99€',
+    'Marvel',
+  ),
+  new Item(
+    '2',
+    'https://m.media-amazon.com/images/I/91Q-n5PzkDL._AC_SX679_.jpg',
+    'Baby groot',
+    'costruzione',
+    '49,99€',
+    'Marvel',
+  ),
+  new Item(
+    '3',
+    'https://www.emp-online.it/dw/image/v2/BBQV_PRD/on/demandware.static/-/Sites-master-emp/default/dw16f3519e/images/4/4/3/6/443641a.jpg?sfrm=png',
+    'Felpa',
+    'Abbigliamento',
+    '54,99€',
+    'Marvel',
+  ),
+  new Item(
+    '4',
+    'https://m.media-amazon.com/images/I/81gzsFn-mZL._AC_SL1500_.jpg',
+    'guanto del infinito',
+    'costruzione',
+    '69,99€',
+    'Marvel',
+  ),
+  new Item(
+    '5',
+    'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS9BSF37RslG0G-Wx6LOUdWsiNRbvjt-DX-qTWRJZwKa1g95Iwl4eGDe96P5Bnc729D3Q3PNiNLJQ&usqp=CAc',
+    'T-shirt',
+    'Abbigliamento',
+    '19,99€',
+    'Marvel',
+  ),
+  new Item(
+    '6',
+    'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQmgP6n63Z669F8DPtPLtf7A_Whjdj0jrVECJVz7LF7Drx1X9kfMWI3zxAma83s7AZL784U1KEAMA&usqp=CAc',
+    'Action figure SpiderMan',
+    'Decoro',
+    '49,99€',
+    'Marvel',
+  ),
+  new Item(
+    '7',
+    'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSOVjMbqHcS5BFnFNkyVmF3d_fDPpuYdgOMsxJmDmo8vtqws_U_psIZxsRw6GP5H3p1PFcMWzMskQBa2pbF0FEZeD4eN-wSK7YwvcrH6rXaUsVMBL150mC0&usqp=CAc',
+    'Quadro',
+    'Decoro',
+    '69,99€',
+    'Marvel',
+  ),
+  new Item(
+    '8',
+    'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRCP2ZeLKJpS4b3hvEsqvcVUggGuRY3du-J4RDEpayJbGnUlQF9WbFdte5KZFwraQl-lC6XsA17WA&usqp=CAc',
+    'Martello di Thor',
+    'costruzione',
+    '119,99€',
+    'Marvel',
+  ),
+  new Item(
+    '9',
+    'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ4Cvg_CqqLtygs9A_5AJkkI--6thcJ7nC_CaIY3TgESncsyb9GbpVMwu_MiBXRVFD6F-4kSzwWRBSw1eZCT3h1mOir1gr4-6_hf4nV9FXBC8VuLZjXA1wYqa7Ew3z9FtjdKIE&usqp=CAc',
+    'Playstation 5 digital + GOW',
+    'console',
+    '499,99€',
+    'Sony',
+  ),
 
-            '69,99€'
-        ), 
-    ],
-    Sony:[
-        new Item (
-            '8',
-            'https://m.media-amazon.com/images/I/81gzsFn-mZL._AC_SL1500_.jpg',
-            'guanto del infinito',
-            'costruzione',
+  new Item(
+    '10',
+    'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRHYcZaJnt3gokDhSzKz4mmR0CO8fyzQpZGhKTebWNzIiNIFxiuiSa2q8fdejb1IKrc5wogCUh9cpE1UmPA14oku6A8hgJyAUGwocOJQcH04FQ&usqp=CAc',
+    'Playstation 5 disc + GOW',
+    'console',
+    '549,99€',
+    'Sony',
+  ),
+  new Item(
+    '11',
+    'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTIl0oqxZZZEV05cTHJaPCDkuWAL7pwWL35B1QRL2V-NrEENi_C3Tsm22NPaGGPeK-FJ75ZPREC5AUcsAQUZ_nGzZSMz7ACGOyN1Bpwrj805mo8nO_Djxxu3Dbb2DI14_E0jg&usqp=CAc',
+    'Elden Ring',
+    'VG',
+    '79,99€',
+    'Sony',
+  ),
+  new Item(
+    '12',
+    'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSEIOHjPHa31nmu_clF5dQvwBo2eBV0zT4KKG71gvchqMV1mUHwAJKCyicQ0u1zZ7FCMzSRjc7Amsjt-pb_fJZXXxEXmIFYaWcqRFT9Ga1CZUPBXlpwvAQeb9Dn3yPhV59bjA&usqp=CAc',
+    'Fifa 23',
+    'VG',
+    '79,99€',
+    'Sony',
+  ),
+  new Item(
+    '13',
+    'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSxtACfeuMBt_dRgt00S6Zr2QA6jNoqC7-kPSiFzkFXt1H2cxr_NmDsHeyY2RDpVN4ipfTg2N417V1BAH2YDzS2yOBUCangq7wkSrXFTkw8Nc7T1mXG0ATCGseY7fZHqQ_bug&usqp=CAc',
+    'Horizon forbidden west',
+    'VG',
+    '79,99€',
+    'Sony',
+  ),
+  new Item(
+    '13',
+    'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSyPyxYcF4x3u29A4S8zvohv1RQxXTqzfoQvsL9-P4EiYG3TIn3WNs5i3JTMqsvbi5D28FqIMvKTCGQBv2S1mAZQkjwEJv_HV4gBwRKI6ESVG20KanX5dmdOZq0HQYzIyiTMw&usqp=CAc',
+    'Dualsense',
+    'controller',
+    '69,99€',
+    'Sony',
+  ),
+  new Item(
+    '14',
+    'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ9u9_C6NKkRbaZ542wyHEO08sDnu3nE2AxCvtVx52BLhoVLsh7CuawPRDCSKLwhpPKEVY3K2rHLmNiCf3FLZxSS9k6nSDPUY1RMeNZIBpVGslKrj8777k-pJ6Nu3LtSMLcdw&usqp=CAc',
+    'Lampada',
+    'decoro',
+    '24,99€',
+    'Sony',
+  ),
+];
 
-            '69,99€'
-        ), 
-    ],
-    Microsoft:[
-        new Item (
-            '8',
-            'https://m.media-amazon.com/images/I/81gzsFn-mZL._AC_SL1500_.jpg',
-            'guanto del infinito',
-            'costruzione',
-
-            '69,99€'
-        ), 
-    ]
-    
-}
-
-export default ITEMS
+export default ITEMS;

@@ -1,16 +1,34 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput, ScrollView} from 'react-native';
+import {View, StyleSheet, TextInput, ScrollView, Text} from 'react-native';
 import HomeShopWindow from '../components/HomeShopWindow';
 import ITEMS from '../fakeItemSell/ItemSells';
 
-const Home = () => {
+const Home = (props) => {
   const [text, setText] = useState('');
-    const boh = Object.keys(ITEMS)
-    console.log(boh)
+  // const franchiseList = Object.keys(ITEMS); 
+  let franchiseList = {};
 
-    const renderHomeShop = boh.map((value) => {
-        return <HomeShopWindow name={value}/>
-    })
+  //set the item based on their franchise
+  for (let i = 0; i < ITEMS.length; i++) {
+    let franchise = ITEMS[i].franchise;
+    if (!franchiseList.hasOwnProperty(franchise)) {
+      franchiseList[franchise] = [ITEMS[i]];
+    }else{
+      franchiseList[franchise].push(ITEMS[i]);
+    }
+    
+  }
+
+  const renderHomeShop = Object.keys(franchiseList).map((franchise, index) => {
+    return (
+      <HomeShopWindow
+        key={index}
+        navigation={props.navigation}
+        franchiseName={franchise}
+        itemList={franchiseList[franchise]}
+      />
+    );
+  });
   return (
     <View style={styles.container}>
       <TextInput
@@ -19,10 +37,9 @@ const Home = () => {
         value={text}
         onChange={(e) => setText(e)}
       />
-        <ScrollView>
-            {renderHomeShop}
-        </ScrollView>
-      
+      <ScrollView>
+        {renderHomeShop}
+      </ScrollView>
     </View>
   );
 };

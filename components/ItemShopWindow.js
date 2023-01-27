@@ -1,11 +1,15 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
-const ItemShopWindow = ({item}) => {
-    console.log(item)
+const ItemShopWindow = ({item, navigation}) => {
+    const gotoItemDetail = () => {
+      navigation.navigate('ItemDetail', {
+        data:item
+      })
+    }
   return (
     <View>
-      <TouchableOpacity style={Styles.container}>
+      <TouchableOpacity onPress={gotoItemDetail} style={Styles.container}>
         <Image
           source={{
             uri: item.image,
