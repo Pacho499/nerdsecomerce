@@ -11,11 +11,14 @@ const CustomButton = (props) => {
 const Styles = StyleSheet.create({
     container:{
         height:40,
-        width:150,
+        width:350,
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#72ACD8',
-        borderRadius:40
+        borderRadius:40,
+        borderColor : 'black',
+        borderWidth : 1,
+        marginVertical: 10
     }
 })
 

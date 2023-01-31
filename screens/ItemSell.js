@@ -27,18 +27,16 @@ const Styles = StyleSheet.create({
   },
   image: {
     height: 300,
-    width: '80%',
     margin: 'auto',
     resizeMode: 'contain',
+
   },
   itemContainer: {
-    flex: 1,
     justifyContent:'center',
   },
   buttonsContainer:{
-    flex:1,
-    flexDirection:'row',
-    justifyContent:'space-around'
+    alignItems:'center',
+    marginTop: 20
   },
 });
 
