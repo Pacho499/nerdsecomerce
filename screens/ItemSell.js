@@ -1,11 +1,26 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, } from 'react-native';
+import {View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import CustomButton from '../components/CustomButton'
+import ITEMS from '../fakeItemSell/ItemSells';
+import ItemShopWindow from '../components/ItemShopWindow';
 
-const ItemSell = ({route}) => {
+const ItemSell = ({route, navigation}) => {
+
+  const suggestedItemByfranchise = ITEMS.filter(item => item.franchise === route.params.data.franchise)
+  const renderSuggestedByFranch = suggestedItemByfranchise.map((value) => {
+    return(
+      <ItemShopWindow item={value} navigation={navigation}/> 
+    )
+  })
+  const suggestedItemBytype = ITEMS.filter(item => item.type === route.params.data.type)
+  const renderSuggestedByType = suggestedItemBytype.map((value) => {
+    return(
+      <ItemShopWindow item={value} navigation={navigation}/> 
+    )
+  })
   const item = route.params.data;
   return (
-    <View style={Styles.container}>
+    <ScrollView style={Styles.container}>
       <View style={Styles.itemContainer}>
         <Image source={{uri: item.image}} style={Styles.image} />
         <Text>{item.title}</Text>
@@ -15,7 +30,16 @@ const ItemSell = ({route}) => {
         <CustomButton title='Aggiungi al carrello'/>
         <CustomButton title='Compra subito'/>
       </View>
-    </View>
+      <Text>Perché hai visto prodotti {item.franchise}</Text>
+      <ScrollView style={Styles.suggested} horizontal={true}>
+        {renderSuggestedByFranch}
+      </ScrollView>
+      <Text>Perche hai visto prodotto di tipo {item.type}</Text>
+      <ScrollView horizontal={true} style={Styles.suggested}>
+        {renderSuggestedByType}
+      </ScrollView>
+        
+    </ScrollView>
   );
 };
 const Styles = StyleSheet.create({
@@ -38,6 +62,9 @@ const Styles = StyleSheet.create({
     alignItems:'center',
     marginTop: 20
   },
+  suggested:{
+    height:250
+  }
 });
 
 export default ItemSell;
