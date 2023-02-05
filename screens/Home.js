@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput, ScrollView, Text} from 'react-native';
+import {View, StyleSheet, TextInput, ScrollView} from 'react-native';
 import HomeShopWindow from '../components/HomeShopWindow';
 import ITEMS from '../fakeItemSell/ItemSells';
 

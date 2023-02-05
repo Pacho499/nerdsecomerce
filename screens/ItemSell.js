@@ -1,26 +1,33 @@
-import React from 'react';
-import {View, StyleSheet, Text, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {View, StyleSheet, Text, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import CustomButton from '../components/CustomButton'
 import ITEMS from '../fakeItemSell/ItemSells';
 import ItemShopWindow from '../components/ItemShopWindow';
+import BuyNowModal from '../components/BuyNowModal';
 
 const ItemSell = ({route, navigation}) => {
 
   const suggestedItemByfranchise = ITEMS.filter(item => item.franchise === route.params.data.franchise)
   const renderSuggestedByFranch = suggestedItemByfranchise.map((value) => {
     return(
-      <ItemShopWindow item={value} navigation={navigation}/> 
+      <ItemShopWindow key={`Franchise ${value.id}`} item={value} navigation={navigation}/> 
     )
   })
   const suggestedItemBytype = ITEMS.filter(item => item.type === route.params.data.type)
   const renderSuggestedByType = suggestedItemBytype.map((value) => {
     return(
-      <ItemShopWindow item={value} navigation={navigation}/> 
+      <ItemShopWindow key={`Type ${value.id}`} item={value} navigation={navigation}/> 
     )
   })
+
+  const openModal = () => {
+    setModalView(true)
+  }
+  const [modalView, setModalView] = useState(false)
   const item = route.params.data;
   return (
     <ScrollView style={Styles.container}>
+      <BuyNowModal onClose={() => {setModalView(false)}} visible={modalView} navigation={navigation}/>
       <View style={Styles.itemContainer}>
         <Image source={{uri: item.image}} style={Styles.image} />
         <Text>{item.title}</Text>
@@ -28,7 +35,7 @@ const ItemSell = ({route, navigation}) => {
       </View>
       <View style={Styles.buttonsContainer}>
         <CustomButton title='Aggiungi al carrello'/>
-        <CustomButton title='Compra subito'/>
+        <CustomButton onPress={openModal} title='Compra subito'/>
       </View>
       <Text>Perché hai visto prodotti {item.franchise}</Text>
       <ScrollView style={Styles.suggested} horizontal={true}>
