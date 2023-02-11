@@ -42,7 +42,6 @@ const Styles = StyleSheet.create({
         marginTop:30,
         paddingBottom:10,
         paddingHorizontal:10,
-        borderBottomColor:'black',
         borderBottomWidth:2
     },
     close:{
