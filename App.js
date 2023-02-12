@@ -1,9 +1,16 @@
-import Home from './screens/Home';
+import { applyMiddleware, createStore } from 'redux';
 import Navigation from './Navigation';
-import {View} from 'react-native';
+import rootReducer from './store/reducers';
+import ReduxThunk from 'redux-thunk'
+import {Provider} from 'react-redux'
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
 export default function App() {
   return (
-    <Navigation/>
+    <Provider store={store}>
+      <Navigation/>
+    </Provider>
+    
   );
 }
