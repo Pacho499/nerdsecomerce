@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import {View, StyleSheet, Text, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import {View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import CustomButton from '../components/CustomButton'
 import ItemShopWindow from '../components/ItemShopWindow';
-import BuyNowModal from '../components/BuyNowModal';
+import BuyNowModal from '../components/modals/BuyNowModal';
 import { useSelector } from 'react-redux';
 
 const ItemSell = ({route, navigation}) => {

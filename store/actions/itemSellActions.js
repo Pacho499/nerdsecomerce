@@ -19,7 +19,6 @@ export const fetchItems = () => {
                 )
             )
         }
-        console.log(itemSell)
         dispatch({type: FETCH_ITEMS, payload: itemSell})
     }
 }

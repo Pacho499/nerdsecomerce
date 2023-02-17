@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import {TouchableOpacity, Text, StyleSheet, Modal, View, TextInput} from 'react-native';
-import CustomButton from './CustomButton';
+import {TouchableOpacity, Text, StyleSheet, Modal, View, TextInput, ScrollView} from 'react-native';
+import CustomButton from '../CustomButton';
 const BuyNowModal = (props) => {
 
     const [adress, setAdress] = useState('')
     const [creditCart, setCreditCart] = useState('')
     const [CVV, setCVV] = useState('')
-
+    const [city, setCity] = useState('')
     const goToLogIn = () => {
         props.navigation.navigate('user')
         props.onClose()
     }
   return (
    <Modal transparent onRequestClose={props.onClose}  animationType='slide' visible={props.visible}>
+    <ScrollView>
         <TouchableOpacity onPress={props.onClose}>
                 <View style={Styles.close}></View>
         </TouchableOpacity>
         <View style={Styles.modal}>
             <View style={Styles.formContainer}>
+                <TextInput placeholder='Città' style={Styles.input} value={city} onChangeText={setCity}/>
                 <TextInput placeholder='Indirizzo' style={Styles.input} value={adress} onChangeText={setAdress}/>
                 <TextInput placeholder='Numero carta di credito' style={Styles.input} value={creditCart} onChangeText={setCreditCart}/>
                 <TextInput placeholder='CVV' style={Styles.input} value={CVV} onChangeText={setCVV}/>
@@ -29,6 +31,8 @@ const BuyNowModal = (props) => {
                 <CustomButton title='Accedi' onPress={goToLogIn} />
             </View>   
         </View>
+    </ScrollView>
+    
     </Modal>
   );
 };
@@ -45,7 +49,7 @@ const Styles = StyleSheet.create({
         borderBottomWidth:2
     },
     close:{
-        height:400,
+        height:350,
         width:'100%',
         backgroundColor: 'rgba(0,0,0,0.4)'
     },
