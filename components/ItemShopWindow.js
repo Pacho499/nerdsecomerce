@@ -17,7 +17,7 @@ const ItemShopWindow = ({item, navigation}) => {
           style={Styles.image}
         />
         <Text style={Styles.productName}>{item.title}</Text>
-        <Text style={Styles.price}>{item.cost}</Text>
+        <Text style={Styles.price}>{item.cost}€</Text>
       </TouchableOpacity>
     </View>
   );

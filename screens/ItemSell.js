@@ -38,7 +38,7 @@ const ItemSell = ({route, navigation}) => {
       <View style={Styles.itemContainer}>
         <Image source={{uri: item.image}} style={Styles.image} />
         <Text>{item.title}</Text>
-        <Text>{item.cost}</Text>
+        <Text>{item.cost}€</Text>
       </View>
       <View style={Styles.buttonsContainer}>
         <CustomButton onPress={addItemToCart} title='Aggiungi al carrello'/>

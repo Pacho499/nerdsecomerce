@@ -1,7 +1,6 @@
 import { ADD_ITEM } from "../actions/cartAction";
 const initialState = {
     items: [],
-    cost: 0, 
   };
   
   const cartReducer = (state = initialState, action) => {
@@ -9,9 +8,8 @@ const initialState = {
     case ADD_ITEM:{
       console.log(action.payload)
       return {
-        item: [...state.items, action.payload],
-        cost: state.cost + action.payload.cost,
-        ...state
+        ...state,
+        items: [...state.items, action.payload],
       }
     }
       default:

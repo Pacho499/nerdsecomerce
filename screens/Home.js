@@ -5,6 +5,7 @@ import Axios from 'axios'
 import { fetchItems } from '../store/actions/itemSellActions';
 import { useDispatch, useSelector } from 'react-redux';
 import SuggestedSearchBar from '../components/SuggestedSearchBar';
+//import ITEMS from '../fakeItemSell/ItemSells';
 
 
 const Home = (props) => {
@@ -66,6 +67,7 @@ const Home = (props) => {
   });
   return (
     <View style={styles.container}> 
+    {/* <Button title='carica dati'onPress={onSubmitData}/> */}
       <View style={styles.inputContainer}>
         <TextInput style={styles.input} placeholder='Cerca un prodotto su Nerds' value={text} onChangeText={setText}/>
         {viewSuggest ? <SuggestedSearchBar navigation={props.navigation} input={text} items={items}/> : null}
