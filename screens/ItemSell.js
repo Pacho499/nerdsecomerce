@@ -3,9 +3,11 @@ import {View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import CustomButton from '../components/CustomButton'
 import ItemShopWindow from '../components/ItemShopWindow';
 import BuyNowModal from '../components/modals/BuyNowModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../store/actions/cartAction';
 
 const ItemSell = ({route, navigation}) => {
+  const dispatch = useDispatch()
   const items = useSelector(state => state.ItemSell.items)
   const suggestedItemByfranchise = items.filter(item => item.franchise === route.params.data.franchise)
   const renderSuggestedByFranch = suggestedItemByfranchise.map((value) => {
@@ -24,6 +26,10 @@ const ItemSell = ({route, navigation}) => {
   const openModal = () => {
     setModalView(true)
   }
+
+  const addItemToCart = () => {
+    dispatch(addItem(item))
+  }
   const [modalView, setModalView] = useState(false)
   const item = route.params.data;
   return (
@@ -35,7 +41,7 @@ const ItemSell = ({route, navigation}) => {
         <Text>{item.cost}</Text>
       </View>
       <View style={Styles.buttonsContainer}>
-        <CustomButton title='Aggiungi al carrello'/>
+        <CustomButton onPress={addItemToCart} title='Aggiungi al carrello'/>
         <CustomButton onPress={openModal} title='Compra subito'/>
       </View>
       <Text>Perché hai visto prodotti {item.franchise}</Text>

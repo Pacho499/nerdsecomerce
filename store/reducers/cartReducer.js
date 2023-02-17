@@ -1,31 +1,19 @@
+import { ADD_ITEM } from "../actions/cartAction";
 const initialState = {
-    item: [],
+    items: [],
     cost: 0, 
   };
   
-  const authUser = (state = initialState, action) => {
+  const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-    //   case SIGNIN: {
-    //     return {
-    //       token: action.token,
-    //       userId: action.userId,
-    //     };
-    //   }
-    //   case SIGNUP:
-    //     return {
-    //       token: action.token,
-    //       userId: action.userId,
-    //     };
-    //   case LOGOUT:
-    //       return{
-    //           initialState
-    //       }
-    //   case RETRIEVE_DATA:{
-    //       return{
-    //           token: action.token,
-    //           userId: action.userId,
-    //       }
-    //   }
+    case ADD_ITEM:{
+      console.log(action.payload)
+      return {
+        item: [...state.items, action.payload],
+        cost: state.cost + action.payload.cost,
+        ...state
+      }
+    }
       default:
         return {
           ...state,
@@ -33,4 +21,4 @@ const initialState = {
     }
   };
   
-  export default authUser;
+  export default cartReducer;
