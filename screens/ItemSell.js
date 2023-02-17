@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import {View, StyleSheet, Text, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import CustomButton from '../components/CustomButton'
-import ITEMS from '../fakeItemSell/ItemSells';
 import ItemShopWindow from '../components/ItemShopWindow';
 import BuyNowModal from '../components/BuyNowModal';
+import { useSelector } from 'react-redux';
 
 const ItemSell = ({route, navigation}) => {
-
-  const suggestedItemByfranchise = ITEMS.filter(item => item.franchise === route.params.data.franchise)
+  const items = useSelector(state => state.ItemSell.items)
+  const suggestedItemByfranchise = items.filter(item => item.franchise === route.params.data.franchise)
   const renderSuggestedByFranch = suggestedItemByfranchise.map((value) => {
     return(
       <ItemShopWindow key={`Franchise ${value.id}`} item={value} navigation={navigation}/> 
     )
   })
-  const suggestedItemBytype = ITEMS.filter(item => item.type === route.params.data.type)
+
+  const suggestedItemBytype = items.filter(item => item.type === route.params.data.type)
   const renderSuggestedByType = suggestedItemBytype.map((value) => {
     return(
       <ItemShopWindow key={`Type ${value.id}`} item={value} navigation={navigation}/> 
