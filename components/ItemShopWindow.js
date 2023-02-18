@@ -2,11 +2,11 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 const ItemShopWindow = ({item, navigation}) => {
-    const gotoItemDetail = () => {
-      navigation.navigate('ItemDetail', {
-        data:item
-      })
-    }
+  const gotoItemDetail = () => {
+    navigation.navigate('ItemDetail', {
+      data: item,
+    });
+  };
   return (
     <View>
       <TouchableOpacity onPress={gotoItemDetail} style={Styles.container}>
@@ -39,11 +39,11 @@ const Styles = StyleSheet.create({
   },
   productName: {
     marginLeft: 5,
-    height: 40
+    height: 40,
   },
-  price:{
-    marginLeft : 5,
-  }
+  price: {
+    marginLeft: 5,
+  },
 });
 
 export default ItemShopWindow;

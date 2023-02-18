@@ -1,57 +1,48 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
-import { useSelector } from 'react-redux';
+import {View, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
+import SectionShopWindow from '../components/SectionShopWindow';
 
-const Section = () => {
-  const items = useSelector(state => state.ItemSell.items) 
+const Section = (props) => {
+  const items = useSelector((state) => state.ItemSell.items);
 
-  let typeList = {}
+  let typeList = {};
   for (let i = 0; i < items.length; i++) {
     let type = items[i].type;
     if (!typeList.hasOwnProperty(type)) {
       typeList[type] = [items[i]];
-    }else{
+    } else {
       typeList[type].push(items[i]);
     }
   }
-  console.log(typeList)
-  const renderList = Object.keys(typeList).map(type => {
-    return(
-      <View style={Style.section}>
-        <TouchableOpacity key={typeList[type][0]['id']} >
-          <Image source={{uri: typeList[type][0]['image']}} style={Style.image} />
-          <Text>{type}</Text>
-        </TouchableOpacity>
-      </View>
-      
-    )
-  })
+  const renderList = Object.keys(typeList).map((type) => {
+    return (
+      <SectionShopWindow
+        typeList={typeList[type]}
+        navigation={props.navigation}
+      />
+    );
+  });
 
-  return (
-    <ScrollView>
-        <View style={Style.container}>
-          {renderList}
-        </View>
-    </ScrollView>
-  );
+  return <View style={Style.container}>{renderList}</View>;
 };
 
 const Style = StyleSheet.create({
   container: {
-    justifyContent:'center',
-    flexDirection:'row',
-    flexWrap:'wrap'
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
-  image:{
-    height:100,
-    width:100
+  image: {
+    height: 100,
+    width: 100,
   },
-  section:{
+  section: {
     borderWidth: 1,
-    width:150,
-    alignItems:'center',
-    margin:10,
-    padding: 5
-  }
+    width: 150,
+    alignItems: 'center',
+    margin: 10,
+    padding: 5,
+  },
 });
 export default Section;

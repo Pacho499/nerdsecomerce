@@ -9,11 +9,12 @@ import Auth from './screens/Auth';
 import Section from './screens/Section';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CheckOut from './screens/Checkout';
+import SectionDetail from './screens/SectionDetail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const Navigation = () => {
+const NavigationHome = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -29,6 +30,21 @@ const Navigation = () => {
         component={ItemSell}
       />
       <Stack.Screen name='Checkout' component={CheckOut} />
+    </Stack.Navigator>
+  );
+};
+
+const NavigationSection = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+          headerStyle: {backgroundColor: '#72ACD8'},
+        }}
+        name='SectionsHome'
+        component={Section}
+      />
+      <Stack.Screen name='SectionDetail' component={SectionDetail} />
     </Stack.Navigator>
   );
 };
@@ -58,20 +74,24 @@ const tabNavigation = () => {
             }
             return <Ionicons name={iconName} size={20} />;
           },
-          tabBarStyle:{
-            backgroundColor:'#72ACD8',
+          tabBarStyle: {
+            backgroundColor: '#72ACD8',
           },
           tabBarActiveTintColor: 'black',
-          tabBarInactiveTintColor: 'black'
+          tabBarInactiveTintColor: 'black',
         })}
       >
         <Tab.Screen
           options={{header: () => null}}
           name='HomeTab'
-          component={Navigation}
+          component={NavigationHome}
         />
         <Tab.Screen name='Cart' component={Cart} />
-        <Tab.Screen name='sections' component={Section} />
+        <Tab.Screen
+          options={{header: () => null}}
+          name='sections'
+          component={NavigationSection}
+        />
         <Tab.Screen name='user' component={Auth} />
       </Tab.Navigator>
     </NavigationContainer>

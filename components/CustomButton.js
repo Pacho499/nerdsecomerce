@@ -9,16 +9,16 @@ const CustomButton = (props) => {
 };
 
 const Styles = StyleSheet.create({
-    container:{
-        height:40,
-        width:350,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#72ACD8',
-        borderRadius:40,
-        borderWidth : 1,
-        marginVertical: 10
-    }
-})
+  container: {
+    height: 40,
+    width: 350,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#72ACD8',
+    borderRadius: 40,
+    borderWidth: 1,
+    marginVertical: 10,
+  },
+});
 
-export default CustomButton
+export default CustomButton;
