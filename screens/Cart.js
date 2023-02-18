@@ -23,7 +23,6 @@ const Cart = (props) => {
           <View style={{marginLeft:20}}>
             <Text>{item.title}</Text>
             <Text>{item.cost}€</Text>
-            
           </View>
         </View>
       )
