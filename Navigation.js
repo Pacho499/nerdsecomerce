@@ -8,6 +8,7 @@ import Cart from './screens/Cart';
 import Auth from './screens/Auth';
 import Section from './screens/Section';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import CheckOut from './screens/Checkout';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,6 +28,7 @@ const Navigation = () => {
         name='ItemDetail'
         component={ItemSell}
       />
+      <Stack.Screen name='Checkout' component={CheckOut} />
     </Stack.Navigator>
   );
 };

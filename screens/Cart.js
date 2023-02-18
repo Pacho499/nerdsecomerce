@@ -1,34 +1,30 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import { useSelector } from 'react-redux';
-const Cart = () => {
+import CustomButton from '../components/CustomButton';
+const Cart = (props) => {
 
   const items = useSelector(state => state.cartReducer.items)
-  let totalCost = 0
-  console.log(items)
-  const calculateCost = () => {
-    for (const item in items){
-      totalCost = totalCost + parseFloat(items[item].cost)
-      console.log(totalCost)
-    }
+  const totalCost = useSelector(state => state.cartReducer.cost)
+
+  const gotoCheckOut = () => {
+    props.navigation.navigate('Checkout')
   }
-  calculateCost()
 
   const renderItem = items.map(item => {
       return(
         <View key={item.id} style={Style.itemContainer}>
           <Image
-          source={{
-            uri: item.image,
-          }}
-          style={Style.image}
-        />
-          <Text>{item.title}</Text>
-          <View style={{flexDirection:'row', marginRight:10}}>
+            source={{
+              uri: item.image,
+            }}
+            style={Style.image}
+          />
+          <View style={{marginLeft:20}}>
+            <Text>{item.title}</Text>
             <Text>{item.cost}€</Text>
-            <Text style={{marginLeft:5}}>X</Text>
+            
           </View>
-          
         </View>
       )
     })
@@ -36,6 +32,10 @@ const Cart = () => {
   return (
     <ScrollView style={Style.container}>
       {renderItem}
+      <View>
+        <Text>Totale: {totalCost.toFixed(2)}€</Text>
+        <CustomButton title={'Acquista'} onPress={gotoCheckOut}/>
+      </View>
     </ScrollView>
   );
 };
@@ -45,8 +45,8 @@ const Style = StyleSheet.create({
     flex: 1
   },
   image: {
-    height: 60,
-    width:60,
+    height: 100,
+    width:100,
     marginVertical:10,
     marginLeft:10
   },
@@ -55,7 +55,6 @@ const Style = StyleSheet.create({
     borderBottomWidth:1,
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'space-between'
   }
 });
 export default Cart;
