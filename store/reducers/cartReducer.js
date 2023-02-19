@@ -1,4 +1,4 @@
-import {ADD_ITEM} from '../actions/cartAction';
+import {ADD_ITEM, REMOVE_ITEM} from '../actions/cartAction';
 const initialState = {
   items: [],
   cost: 0,
@@ -13,6 +13,13 @@ const cartReducer = (state = initialState, action) => {
         items: [...state.items, action.payload],
         cost: cost,
       };
+    }
+    case REMOVE_ITEM: {
+      return{
+        ...state,
+        items: state.items.filter(item => item.id !== action.payload.id),
+        cost: state.cost - action.payload.cost
+      }
     }
     default:
       return {
