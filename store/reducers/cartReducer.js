@@ -29,16 +29,18 @@ const cartReducer = (state = initialState, action) => {
     }
     case REMOVE_ITEM: {
       const items = state.items
+      const quantity = state.items[action.payload.id]['quantity']
       delete state.items[action.payload.id]
+      
       return{
         ...state,
         items: items,
-        cost: state.cost - action.payload.cost
+        cost: state.cost - (action.payload.cost * quantity)
       }
     }
     case FAST_ADD_ITEM:{
       const items = state.items
-      items[action.payload]['quantity'] = items[action.payload]['quantity'] +1
+      items[action.payload]['quantity'] = items[action.payload]['quantity'] + 1
       console.log(items) 
       return{
         ...state,
