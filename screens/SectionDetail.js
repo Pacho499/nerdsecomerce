@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
+import Item from '../components/Item';
 
 const SectionDetail = ({route}) => {
   const items = route.params.data;
+  console.log(items)
+  const renderItems = items.map((item) => <Item item={item} isCart={false}/>)
   return (
     <View style={Style.container}>
-      <Text>SectionDetail!</Text>
+      <ScrollView>
+        {renderItems}
+      </ScrollView>
+      
     </View>
   );
 };
@@ -13,8 +19,6 @@ const SectionDetail = ({route}) => {
 const Style = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center',
   },
 });
 export default SectionDetail;

@@ -15,9 +15,10 @@ const Section = (props) => {
       typeList[type].push(items[i]);
     }
   }
-  const renderList = Object.keys(typeList).map((type) => {
+  const renderList = Object.keys(typeList).map((type,idx) => {
     return (
       <SectionShopWindow
+        key={idx}
         typeList={typeList[type]}
         navigation={props.navigation}
       />

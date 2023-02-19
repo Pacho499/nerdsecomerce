@@ -40,11 +40,16 @@ const NavigationSection = () => {
       <Stack.Screen
         options={{
           headerStyle: {backgroundColor: '#72ACD8'},
+          title:'Sezioni'
         }}
         name='SectionsHome'
         component={Section}
       />
-      <Stack.Screen name='SectionDetail' component={SectionDetail} />
+      <Stack.Screen 
+        name='SectionDetail' 
+        component={SectionDetail} 
+        options={({route}) => ({title: route.params.data[0].type})}
+      />
     </Stack.Navigator>
   );
 };
@@ -86,9 +91,9 @@ const tabNavigation = () => {
           name='HomeTab'
           component={NavigationHome}
         />
-        <Tab.Screen name='Cart' component={Cart} />
+        <Tab.Screen name='Cart' options={{title:'Carrello'}} component={Cart} />
         <Tab.Screen
-          options={{header: () => null}}
+          options={{header: () => null, title:'Sezioni'}}
           name='sections'
           component={NavigationSection}
         />

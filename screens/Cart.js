@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import CustomButton from '../components/CustomButton';
-import { removeItem } from '../store/actions/cartAction';
+import Item from '../components/Item'
 const Cart = (props) => {
   const items = useSelector((state) => state.cartReducer.items);
   const totalCost = useSelector((state) => state.cartReducer.cost);
-  const dispatch = useDispatch()
   const gotoCheckOut = () => {
     props.navigation.navigate('Checkout');
   };
@@ -26,28 +25,7 @@ const Cart = (props) => {
   }, {})
 
   const renderItem = itemsToRender.map((item) => {
-    console.log('item in cart',item)
-    return (
-      <View key={item.id} style={Style.itemContainer}>
-        <Image
-          source={{
-            uri: item.image,
-          }}
-          style={Style.image}
-        />
-        <View style={{marginLeft: 20}}>
-          <Text>{item.title}</Text>
-          <Text>{item.cost}€</Text>
-          <Text>Quantità {countItem[item.id]}</Text>
-        </View>
-        <TouchableOpacity onPress={() => dispatch(removeItem(item))}>
-          <View style={Style.removeButton}>
-            <Text>X</Text>
-          </View>
-        </TouchableOpacity>
-        
-      </View>
-    );
+    return <Item isCart={true} item={item} count={countItem}/>;
   });
 
   return (
@@ -65,24 +43,5 @@ const Style = StyleSheet.create({
   container: {
     flex: 1,
   },
-  image: {
-    height: 100,
-    width: 100,
-    marginVertical: 10,
-    marginLeft: 10,
-  },
-  itemContainer: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent:'space-around',
-    marginTop:10
-  },
-  removeButton:{
-    padding: 10,
-    backgroundColor: '#72ACD8',
-    borderRadius:10,
-  }
 });
 export default Cart;
