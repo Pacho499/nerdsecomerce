@@ -10,22 +10,10 @@ const Cart = (props) => {
     props.navigation.navigate('Checkout');
   };
 
-  const itemsToRender = items.filter((item, idx, array) => {
-    return array.findIndex(itm => itm.id === item.id) === idx
-  })
-
-  const countItem = items.reduce((acc, item) => {
-    const id = item.id
-    if(!acc[id]){
-      acc[id] = 1
-    }else{
-      acc[id] += 1
-    }
-    return acc
-  }, {})
+  const itemsToRender = Object.values(items)
 
   const renderItem = itemsToRender.map((item) => {
-    return <Item isCart={true} item={item} count={countItem}/>;
+    return <Item key={item.item.id} isCart={true} item={item} />;
   });
 
   return (
