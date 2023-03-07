@@ -7,7 +7,6 @@ const BuyNowModal = (props) => {
         creditCart: '',
         CVV: '',
         city:  '',
-        readyToBuy : false,
         buyed:false,
     })
     const[readyToBuy, setReadyToBuy] = useState(false)
