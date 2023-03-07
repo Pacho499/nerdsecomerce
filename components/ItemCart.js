@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux"
 import { removeItem, fastAddItem } from "../store/actions/cartAction"
 const ItemCart = ({item}) => {
     const dispatch = useDispatch()
-    console.log(item)
     return(
         <View key={item.item.id} style={Styles.container}>
             <Image
@@ -19,16 +18,16 @@ const ItemCart = ({item}) => {
                     <Text>Quantità {item.quantity}</Text>
                 </View>
                 <View style={Styles.buttonContainer}>
-                    <TouchableOpacity onPress={() => dispatch(fastAddItem(item.item.id))}>
+                    {/* <TouchableOpacity onPress={() => dispatch(fastAddItem(item.item.id))}>
                         <View style={Styles.quantityButton}>
-                            <Text>x</Text>
+                            <Text>-</Text>
                         </View>
                     </TouchableOpacity> 
                     <TouchableOpacity onPress={() => dispatch(fastAddItem(item.item.id))}>
                         <View style={Styles.quantityButton}>
                             <Text>+</Text>
                         </View>
-                    </TouchableOpacity> 
+                    </TouchableOpacity>  */}
                 </View> 
             </View>
                 <TouchableOpacity onPress={() => dispatch(removeItem(item.item))}>
