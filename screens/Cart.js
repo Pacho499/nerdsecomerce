@@ -10,9 +10,7 @@ const Cart = (props) => {
     props.navigation.navigate('Checkout');
   };
 
-  const itemsToRender = Object.values(items)
-
-  const renderItem = itemsToRender.map((item) => {
+  const renderItem = Object.values(items).map((item) => {
     return <Item key={item.item.id} isCart={true} item={item} />;
   });
 
