@@ -31,11 +31,10 @@ const cartReducer = (state = initialState, action) => {
       const items = state.items
       const quantity = state.items[action.payload.id]['quantity']
       delete state.items[action.payload.id]
-      
       return{
         ...state,
         items: items,
-        cost: state.cost - (action.payload.cost * quantity)
+        cost: Math.round((state.cost - (action.payload.cost * quantity))  * 100) / 100
       }
     }
     case FAST_ADD_ITEM:{
