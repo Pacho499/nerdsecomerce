@@ -3,7 +3,6 @@ import {useDispatch} from 'react-redux';
 import {addItem} from '../store/actions/cartAction';
 const ItemSection = ({item}) => {
   const dispatch = useDispatch();
-  console.log(item);
   return (
     <View key={item.id} style={Styles.container}>
       <Image
