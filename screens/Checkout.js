@@ -30,7 +30,9 @@ const buyed = () => {
 }
   return (
     <KeyboardAvoidingView style={Style.container}>
-      <Text>Indirizzo di spedizione e dati acquirente</Text>
+      {formState.buyed ? <Text>Acquisto effettuato con successo!</Text> :
+      <>
+        <Text>Indirizzo di spedizione e dati acquirente</Text>
       <TextInput
         placeholder='Città'
         style={Style.input}
@@ -63,6 +65,9 @@ const buyed = () => {
         onChangeText={text => setFormState({...formState,CVV:text})}
       />
       {readyToBuy ? <CustomButton onPress={buyed} title={'acquista'} /> : <CustomButton title={'Compila i campi'}/>}
+      </>
+      }
+      
     </KeyboardAvoidingView>
   );
 };
