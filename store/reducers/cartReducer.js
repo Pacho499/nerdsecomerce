@@ -40,7 +40,6 @@ const cartReducer = (state = initialState, action) => {
     case FAST_ADD_ITEM:{
       const items = state.items
       items[action.payload]['quantity'] = items[action.payload]['quantity'] + 1
-      console.log(items) 
       return{
         ...state,
         items: items
