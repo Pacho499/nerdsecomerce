@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import CustomButton from '../components/CustomButton';
-import Item from '../components/Item'
+import ItemCart from '../components/ItemCart'
 const Cart = (props) => {
   const items = useSelector((state) => state.cartReducer.items);
   const totalCost = useSelector((state) => state.cartReducer.cost);
@@ -11,7 +11,7 @@ const Cart = (props) => {
   };
 
   const renderItem = Object.values(items).map((item) => {
-    return <Item key={item.item.id} isCart={true} item={item} />;
+    return <ItemCart key={item.item.id} item={item} />;
   });
 
   return (

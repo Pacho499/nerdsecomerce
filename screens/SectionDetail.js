@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
-import Item from '../components/Item';
+import ItemSection from '../components/ItemSection';
 
 const SectionDetail = ({route}) => {
   const items = route.params.data;
   console.log(items)
-  const renderItems = items.map((item) => <Item item={item} isCart={false}/>)
+  const renderItems = items.map((item) => <ItemSection key={item.id} item={item}/>)
   return (
     <View style={Style.container}>
       <ScrollView>

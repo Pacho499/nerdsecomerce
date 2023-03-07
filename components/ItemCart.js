@@ -1,25 +1,24 @@
-import { useState } from "react"
 import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native"
 import { useDispatch } from "react-redux"
-import { removeItem, addItem, fastAddItem } from "../store/actions/cartAction"
-const Item = ({item, isCart}) => {
+import { removeItem, fastAddItem } from "../store/actions/cartAction"
+const ItemCart = ({item}) => {
     const dispatch = useDispatch()
     console.log(item)
     return(
-        <View key={isCart ? item.item.id : item.id} style={Styles.container}>
+        <View key={item.item.id} style={Styles.container}>
             <Image
             source={{
-                uri: isCart ? item.item.image : item.image
+                uri: item.item.image
             }}
             style={Styles.image}
             />
             <View style={{marginLeft: 20, width:'50%'}}>
                 <View style={{}}>
-                   <Text>{isCart ? item.item.title : item.title}</Text>
-                    <Text>{isCart ? item.item.cost : item.cost}€</Text>
-                    {isCart ? <Text>Quantità {item.quantity}</Text> : null} 
+                   <Text>{item.item.title}</Text>
+                    <Text>{item.item.cost}€</Text>
+                    <Text>Quantità {item.quantity}</Text>
                 </View>
-                {isCart ? <View style={Styles.buttonContainer}>
+                <View style={Styles.buttonContainer}>
                     <TouchableOpacity onPress={() => dispatch(fastAddItem(item.item.id))}>
                         <View style={Styles.quantityButton}>
                             <Text>x</Text>
@@ -30,21 +29,13 @@ const Item = ({item, isCart}) => {
                             <Text>+</Text>
                         </View>
                     </TouchableOpacity> 
-                </View> : null}
+                </View> 
             </View>
-            {isCart ? 
                 <TouchableOpacity onPress={() => dispatch(removeItem(item.item))}>
                     <View style={Styles.removeButton}>
                         <Text>X</Text>
                     </View>
                 </TouchableOpacity> 
-                : 
-                <TouchableOpacity onPress={() => dispatch(addItem(item))}>
-                    <View style={Styles.removeButton}>
-                        <Text>+</Text>
-                    </View>
-                </TouchableOpacity>
-            }
         </View>
     )
 }
@@ -81,4 +72,4 @@ const Styles = StyleSheet.create({
       }
 })
 
-export default Item
+export default ItemCart
