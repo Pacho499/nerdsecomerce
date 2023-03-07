@@ -4,7 +4,6 @@ import ItemSection from '../components/ItemSection';
 
 const SectionDetail = ({route}) => {
   const items = route.params.data;
-  console.log(items)
   const renderItems = items.map((item) => <ItemSection key={item.id} item={item}/>)
   return (
     <View style={Style.container}>
