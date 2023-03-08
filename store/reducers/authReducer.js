@@ -1,8 +1,8 @@
-import { SIGN_UP, LOG_IN } from "../actions/AuthAction";
+import { SIGN_UP, LOG_IN, LOG_OUT, RETRIEVE_DATA } from "../actions/AuthAction";
 
 const initialState = {
   token: null,
-  userdId: null,
+  userId: null,
   username:'',
   cardNumber:'',
   adressInfo:{}
@@ -15,7 +15,7 @@ const authUser = (state = initialState, action) => {
       return{
         ...state,
         token: action.firebase.data.idToken,
-        userdId: action.firebase.data.localId,
+        userId: action.firebase.data.localId,
         username: action.form.name,
         cardNumber: action.form.card,
         adressInfo:{
@@ -28,12 +28,27 @@ const authUser = (state = initialState, action) => {
       return{
         ...state,
         token: action.firebase.data.idToken,
-        userdId: action.firebase.data.localId,
-        username: action.userDatas.data.username,
-        cardNumber: action.userDatas.data.cardNumber,
-        adressInfo: action.userDatas.data.adressInfo,
+        userId: action.firebase.data.localId,
+        username: action.userDatas.username,
+        cardNumber: action.userDatas.cardNumber,
+        adressInfo: action.userDatas.adressInfo,
       }
     }
+    case LOG_OUT:{
+      return{
+        initialState
+      }
+    }
+    case RETRIEVE_DATA:{
+      console.log(action)
+      return{
+          token: action.firebase.token,
+          userId: action.firebase.userId,
+          username: action.userDatas.username,
+          cardNumber: action.userDatas.cardNumber,
+          adressInfo:action.userDatas.adressInfo,
+      }
+  }
     default:
       return {
         ...state,
