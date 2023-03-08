@@ -1,4 +1,4 @@
-import { SIGN_UP, LOG_IN, LOG_OUT, RETRIEVE_DATA } from "../actions/AuthAction";
+import { SIGN_UP, LOG_IN, LOG_OUT, RETRIEVE_DATA, CHANGE_ADRESS, CHANGE_CARD } from "../actions/AuthAction";
 
 const initialState = {
   token: null,
@@ -39,6 +39,24 @@ const authUser = (state = initialState, action) => {
     case LOG_OUT:{
       return{
         initialState
+      }
+    }
+    case CHANGE_ADRESS:{
+      return{
+        ...state,
+        adressInfo:{
+          city:action.city,
+          adress:action.adress
+        }
+      }
+    }
+    case CHANGE_CARD:{
+      return{
+        ...state,
+        cardData:{
+          cardNumber: action.cardNumber,
+          card:action.card,
+        }
       }
     }
     case RETRIEVE_DATA:{

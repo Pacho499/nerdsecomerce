@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 import CustomButton from "./CustomButton";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-const UserDataReview = ({buyed}) => {
+const UserDataReview = ({buyed, changeData}) => {
     const adressInfo = useSelector((state) => state.authUser.adressInfo);
     const card = useSelector((state) => state.authUser.cardData);
     const [CVV , setCVV] = useState('')
@@ -18,7 +18,7 @@ const UserDataReview = ({buyed}) => {
                   <Text style={{marginVertical:20}}>Dati della carta utilizzata</Text>
                   <Text>Circuito: {card.card}</Text>
                   <Text>Numero carta:{card.cardNumber.substr(12).padStart(16, '*')}</Text>
-                  <CustomButton title='Cambia dati'/>
+                  <CustomButton title='Cambia dati' onPress={changeData}/>
                   
                 </View>
                 <TextInput

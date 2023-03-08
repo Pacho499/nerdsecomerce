@@ -3,7 +3,9 @@ import {AsyncStorage} from 'react-native'
 const SIGN_UP = 'SIGN_UP';
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
-const RETRIEVE_DATA = 'RETRIEVE_DATA'
+const RETRIEVE_DATA = 'RETRIEVE_DATA';
+const CHANGE_ADRESS = 'CHANGE_ADRESS';
+const CHANGE_CARD = 'CHANGE_CARD';
 
 export const signUp = (formDatas) => {
     return async dispatch => {
@@ -67,4 +69,25 @@ export const retrieveData = () => {
     }
 }
 
-export {SIGN_UP, LOG_IN, LOG_OUT, RETRIEVE_DATA};
+export const changeAdress = (adress, city, userId) => {
+    return async dispatch => {
+        const data = await axios.put(`https://nerdsecomerce-default-rtdb.firebaseio.com/users/${userId}/adressInfo.json`, 
+        {
+            adress:adress,
+            city:city,
+        })
+        dispatch({type:CHANGE_ADRESS, adress:adress, city:city})
+    }
+}
+export const changeCard = (cardNumber, card, userId) => {
+    return async dispatch => {
+        const data = await axios.put(`https://nerdsecomerce-default-rtdb.firebaseio.com/users/${userId}/cardData.json`, 
+        {
+            cardNumber:cardNumber,
+            card:card,
+        })
+        dispatch({type:CHANGE_CARD, cardNumber:cardNumber, card:card})
+    }
+}
+
+export {SIGN_UP, LOG_IN, LOG_OUT, RETRIEVE_DATA, CHANGE_ADRESS, CHANGE_CARD};

@@ -21,6 +21,7 @@ const BuyNowModal = (props) => {
     buyed: false,
   });
   const [readyToBuy, setReadyToBuy] = useState(false);
+  const [standardUserData, setStandardUserData] = useState(true)
 
   useEffect(() => {
     if (formState.CVV.length === 3 && formState.creditCart.length === 16) {
@@ -74,8 +75,8 @@ const BuyNowModal = (props) => {
             <View style={Styles.close}></View>
           </TouchableOpacity>
           <View style={Styles.modal}>
-            {token ? (
-              <UserDataReview buyed={buyed}/>
+            {token && standardUserData ? (
+              <UserDataReview buyed={buyed} changeData={() => {setStandardUserData(false)}}/>
             ) : (
               <>
                 <View style={Styles.formContainer}>
@@ -118,11 +119,17 @@ const BuyNowModal = (props) => {
                   )}
                 </View>
                 <View style={Styles.container}>
+                  {token ? 
+                  <CustomButton title='Utilizza i dati salvati' onPress={() => {setStandardUserData(true)}}/>
+                   :
+                  <>
                   <Text>
                     Effettua l'accesso per rendere l'operazione più veloce
                   </Text>
                   <CustomButton title='Chiudi' onPress={props.onClose} />
                   <CustomButton title='Accedi' onPress={goToLogIn} />
+                  </> 
+                  }
                 </View>
               </>
             )}
