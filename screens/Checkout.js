@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet, TextInput, KeyboardAvoidingView} from 'react-native';
 import CustomButton from '../components/CustomButton';
+import UserDataReview from '../components/UserDataReview';
+import { useSelector } from 'react-redux';
 
 const CheckOut = (props) => {
+  const token = useSelector(state => state.authUser.token)
   const [formState, setFormState] = useState({
     adress: '',
     creditCart: '',
@@ -30,7 +33,8 @@ const buyed = () => {
 }
   return (
     <KeyboardAvoidingView style={Style.container}>
-      {formState.buyed ? <Text>Acquisto effettuato con successo!</Text> :
+      { formState.buyed ? <Text>Acquisto effettuato con successo!</Text> :
+      token ? <UserDataReview buyed={buyed} /> :
       <>
         <Text>Indirizzo di spedizione e dati acquirente</Text>
       <TextInput
