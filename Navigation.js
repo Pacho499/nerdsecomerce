@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { useDispatch, useSelector } from 'react-redux';
-import { retrieveData } from './store/actions/AuthAction';
-import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {retrieveData} from './store/actions/AuthAction';
 import Home from './screens/Home';
 import ItemSell from './screens/ItemSell';
 import Cart from './screens/Cart';
@@ -43,14 +42,14 @@ const NavigationSection = () => {
       <Stack.Screen
         options={{
           headerStyle: {backgroundColor: '#72ACD8'},
-          title:'Sezioni'
+          title: 'Sezioni',
         }}
         name='SectionsHome'
         component={Section}
       />
-      <Stack.Screen 
-        name='SectionDetail' 
-        component={SectionDetail} 
+      <Stack.Screen
+        name='SectionDetail'
+        component={SectionDetail}
         options={({route}) => ({title: route.params.data[0].type})}
       />
     </Stack.Navigator>
@@ -60,9 +59,9 @@ const NavigationSection = () => {
 const tabNavigation = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(retrieveData())
-  }, [dispatch])
-  const token = useSelector(state => state.authUser.token)
+    dispatch(retrieveData());
+  }, [dispatch]);
+  const token = useSelector((state) => state.authUser.token);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -83,7 +82,7 @@ const tabNavigation = () => {
                 iconName = focused ? 'md-log-in' : 'md-log-in-outline';
                 break;
               case 'userSettings':
-                iconName = focused ? 'md-body' : 'md-body-outline'
+                iconName = focused ? 'md-body' : 'md-body-outline';
               default:
                 break;
             }
@@ -101,13 +100,21 @@ const tabNavigation = () => {
           name='HomeTab'
           component={NavigationHome}
         />
-        <Tab.Screen name='Cart' options={{title:'Carrello'}} component={Cart} />
         <Tab.Screen
-          options={{header: () => null, title:'Sezioni'}}
+          name='Cart'
+          options={{title: 'Carrello'}}
+          component={Cart}
+        />
+        <Tab.Screen
+          options={{header: () => null, title: 'Sezioni'}}
           name='sections'
           component={NavigationSection}
         />
-        {token ? <Tab.Screen name='userSettings' component={User} /> : <Tab.Screen name='user' component={Auth} />}
+        {token ? (
+          <Tab.Screen name='userSettings' component={User} />
+        ) : (
+          <Tab.Screen name='user' component={Auth} />
+        )}
       </Tab.Navigator>
     </NavigationContainer>
   );
