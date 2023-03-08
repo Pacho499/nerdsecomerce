@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { useDispatch, useSelector } from 'react-redux';
+import { retrieveData } from './store/actions/AuthAction';
+import axios from 'axios';
 import Home from './screens/Home';
 import ItemSell from './screens/ItemSell';
 import Cart from './screens/Cart';
@@ -10,7 +13,7 @@ import Section from './screens/Section';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CheckOut from './screens/Checkout';
 import SectionDetail from './screens/SectionDetail';
-
+import User from './screens/User';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -55,6 +58,11 @@ const NavigationSection = () => {
 };
 
 const tabNavigation = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(retrieveData())
+  }, [dispatch])
+  const token = useSelector(state => state.authUser.token)
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -74,6 +82,8 @@ const tabNavigation = () => {
               case 'user':
                 iconName = focused ? 'md-log-in' : 'md-log-in-outline';
                 break;
+              case 'userSettings':
+                iconName = focused ? 'md-body' : 'md-body-outline'
               default:
                 break;
             }
@@ -97,7 +107,7 @@ const tabNavigation = () => {
           name='sections'
           component={NavigationSection}
         />
-        <Tab.Screen name='user' component={Auth} />
+        {token ? <Tab.Screen name='userSettings' component={User} /> : <Tab.Screen name='user' component={Auth} />}
       </Tab.Navigator>
     </NavigationContainer>
   );
