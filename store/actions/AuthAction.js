@@ -19,7 +19,10 @@ export const signUp = (formDatas) => {
                 city: formDatas.city,
                 adress:formDatas.adress
             },
-            cardNumber: formDatas.card,
+            cardData : {
+               cardNumber: formDatas.cardNumber,
+                card:formDatas.card 
+            } 
         });
         dispatch({type:SIGN_UP, firebase:data, form:formDatas})
         saveData(data.data.idToken, data.data.localId)

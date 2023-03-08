@@ -4,20 +4,22 @@ const initialState = {
   token: null,
   userId: null,
   username:'',
-  cardNumber:'',
+  cardData:{},
   adressInfo:{}
 };
 
 const authUser = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_UP:{
-      console.log(action)
       return{
         ...state,
         token: action.firebase.data.idToken,
         userId: action.firebase.data.localId,
         username: action.form.name,
-        cardNumber: action.form.card,
+        cardData:{
+          cardNumber: action.form.cardNumber,
+          card:action.form.card,
+        },
         adressInfo:{
           city: action.form.city,
           adress: action.form.adress
@@ -30,7 +32,7 @@ const authUser = (state = initialState, action) => {
         token: action.firebase.data.idToken,
         userId: action.firebase.data.localId,
         username: action.userDatas.username,
-        cardNumber: action.userDatas.cardNumber,
+        cardData: action.userDatas.cardData,
         adressInfo: action.userDatas.adressInfo,
       }
     }
@@ -40,12 +42,11 @@ const authUser = (state = initialState, action) => {
       }
     }
     case RETRIEVE_DATA:{
-      console.log(action)
       return{
           token: action.firebase.token,
           userId: action.firebase.userId,
           username: action.userDatas.username,
-          cardNumber: action.userDatas.cardNumber,
+          cardData: action.userDatas.cardData,
           adressInfo:action.userDatas.adressInfo,
       }
   }

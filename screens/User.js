@@ -7,8 +7,7 @@ import { useDispatch } from "react-redux";
 const User = () => {
     const dispatch = useDispatch();
     const adress = useSelector(state => state.authUser.adressInfo)
-    const card = useSelector(state => state.authUser.cardNumber)
-    console.log(adress)
+    const card = useSelector(state => state.authUser.cardData)
     return(
         <View style={Style.container}>
             <Text>Impostazioni utente</Text>
@@ -22,7 +21,8 @@ const User = () => {
             </View>
             <View style={Style.box}>
                 <Text>La tua carta predefinita</Text>
-                <Text>{card.substr(12).padStart(16, '*')}</Text>
+                <Text>Circuito : {card.card}</Text>
+                <Text>Numero: {card.cardNumber.substr(12).padStart(16, '*')}</Text>
                 <CustomButton title="Cambia carta"/>
             </View>
             <CustomButton title='LogOut' onPress={() => {dispatch(logout())}} />

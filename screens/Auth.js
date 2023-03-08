@@ -10,6 +10,7 @@ const Auth = () => {
     email:'',
     password:'',
     name:'',
+    cardNumber:null,
     card:'',
     adress:'',
     city:''
@@ -58,6 +59,13 @@ const Auth = () => {
           <Text>Carta di credito</Text>
           <TextInput
             placeholder='Numero carta (16 numeri)'
+            keyboardType='number-pad'
+            style={Style.input}
+            value={form.cardNumber}
+            onChangeText={text => {setForm({...form, cardNumber:text})}}
+          />
+          <TextInput
+            placeholder='Visa / Mastercard'
             style={Style.input}
             value={form.card}
             onChangeText={text => {setForm({...form, card:text})}}
