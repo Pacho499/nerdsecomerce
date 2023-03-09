@@ -11,6 +11,7 @@ const User = () => {
   const adress = useSelector((state) => state.authUser.adressInfo);
   const card = useSelector((state) => state.authUser.cardData);
   const userId = useSelector((state) => state.authUser.userId);
+  const userName = useSelector((state) => state.authUser.username)
   const [modifyAdress, setModifyAdress] = useState(false);
   const [modifyCard, setModifyCard] = useState(false);
   const [form, setForm] = useState({
@@ -46,7 +47,7 @@ const User = () => {
     <ScrollView>
       <View style={Style.container}>
         <Text style={{fontSize: 25, fontWeight: '700'}}>
-          Impostazioni utente
+        Ciao {userName}
         </Text>
         <View style={Style.box}>
           <Text style={Style.title}>

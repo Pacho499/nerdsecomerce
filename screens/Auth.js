@@ -19,14 +19,27 @@ const Auth = () => {
     email: '',
     password: '',
     name: '',
-    cardNumber: null,
+    cardNumber: '',
     card: '',
     adress: '',
     city: '',
+    error:false
   });
   const isError = useSelector((state) => state.authUser.error);
   const errorMessage = useSelector((state) => state.authUser.errorMessage);
   const [isLogIn, setIsLogIn] = useState(true);
+  
+  const SignUpVerification = () => {
+    if(form.cardNumber.length !== 16 || form.adress.length < 1 || form.city.length < 1 || form.name.length < 1 ){
+      setForm({...form, error:true})
+      setTimeout(() => {
+        setForm({...form, error:false})
+      }, 4000);
+    }else{
+      dispatch(signUp(form));
+    }
+  }
+
   return (
     <KeyboardAvoidingView style={Style.container}>
       <ScrollView>
@@ -110,6 +123,7 @@ const Auth = () => {
             </>
           )}
           {isError ? <Text style={Style.error}>{errorMessage}</Text> : null}
+          {form.error ? <Text style={Style.error}>Tutti i campi devono essere compilati, la tua carta contiene {form.cardNumber.length} cifre</Text> : null}
         </View>
         {isLogIn ? (
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -132,9 +146,7 @@ const Auth = () => {
             <CustomButton title={'Accedi'} onPress={() => setIsLogIn(true)} />
             <CustomButton
               title={'Iscriviti'}
-              onPress={() => {
-                dispatch(signUp(form));
-              }}
+              onPress={() => {SignUpVerification()}}
             />
           </View>
         )}

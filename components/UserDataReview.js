@@ -2,7 +2,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import CustomButton from './CustomButton';
 import {useSelector} from 'react-redux';
 import {colors} from '../utils/colors';
-const UserDataReview = ({navigation}) => {
+const UserDataReview = ({navigation, changeData, isFastBuy}) => {
   const adressInfo = useSelector((state) => state.authUser.adressInfo);
   const card = useSelector((state) => state.authUser.cardData);
   return (
@@ -34,10 +34,11 @@ const UserDataReview = ({navigation}) => {
             Numero carta : {card.cardNumber.substr(12).padStart(16, '*')}
           </Text>
         </View>
-        <CustomButton
+          <CustomButton
           title='Cambia dati'
-          onPress={() => navigation.navigate('userSettings')}
+          onPress={ isFastBuy ? () => navigation.navigate('userSettings') : () => changeData()}
         />
+        
       </View>
     </View>
   );

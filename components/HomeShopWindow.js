@@ -10,7 +10,7 @@ const HomeShopWindow = ({franchiseName, navigation, itemList}) => {
   return (
     <View style={Styles.container}>
       <Text style={Styles.title}>{franchiseName}</Text>
-      <ScrollView style={Styles.shopContainer} horizontal={true}>
+      <ScrollView horizontal={true}>
         {renderItemShopWindow}
       </ScrollView>
     </View>
