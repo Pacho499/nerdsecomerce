@@ -2,24 +2,28 @@ import {View, Text, StyleSheet, TextInput} from 'react-native';
 import CustomButton from './CustomButton';
 import {useSelector} from 'react-redux';
 import {useState} from 'react';
+import { colors } from '../utils/colors';
 const UserDataReview = ({buyed, changeData}) => {
   const adressInfo = useSelector((state) => state.authUser.adressInfo);
   const card = useSelector((state) => state.authUser.cardData);
   const [CVV, setCVV] = useState('');
   return (
     <View style={Styles.container}>
-      <Text style={{marginVertical: 20, fontSize: 18, textAlign: 'center'}}>
+      <Text style={{marginVertical: 20, fontSize: 18, textAlign: 'center', fontWeight:'500'}}>
         Dai un occhiata ai tuoi dati prima di procedere con l'acquisto
       </Text>
       <View>
-        <Text style={{marginVertical: 20}}>Dati di spedizione</Text>
-        <View>
+        <Text style={{marginVertical: 20, textAlign:'center', fontSize:18}}>Dati di spedizione</Text>
+        <View style={Styles.box}>
           <Text style={{marginBottom: 10}}>Città : {adressInfo.city}</Text>
           <Text>Via / Piazza : {adressInfo.adress}</Text>
         </View>
-        <Text style={{marginVertical: 20}}>Dati della carta utilizzata</Text>
-        <Text>Circuito: {card.card}</Text>
-        <Text>Numero carta:{card.cardNumber.substr(12).padStart(16, '*')}</Text>
+        <Text style={{marginVertical: 20, textAlign:'center', fontSize:18}}>Dati della carta utilizzata</Text>
+        <View style={Styles.box}>
+          <Text style={{marginBottom: 10}}>Circuito : {card.card}</Text>
+          <Text>Numero carta : {card.cardNumber.substr(12).padStart(16, '*')}</Text>
+        </View>
+        
         <CustomButton title='Cambia dati' onPress={changeData} />
       </View>
       <TextInput
@@ -41,11 +45,19 @@ const Styles = StyleSheet.create({
   },
   input: {
     width: 100,
-    marginTop: 30,
-    paddingBottom: 10,
-    paddingHorizontal: 10,
-    borderBottomWidth: 2,
+    marginTop: 20,
+    padding:10,
+    borderWidth: 2,
+    textAlign:'center',
+    borderRadius:10,
+    borderColor:colors.secondaryPurple
   },
+  box:{
+    borderWidth:2,
+    padding:10,
+    borderColor:colors.mainPurple,
+    borderRadius:20,
+  }
 });
 
 export default UserDataReview;

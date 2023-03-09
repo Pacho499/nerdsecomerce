@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useDispatch, useSelector} from 'react-redux';
 import {retrieveData} from './store/actions/AuthAction';
+import { colors } from './utils/colors';
 import Home from './screens/Home';
 import ItemSell from './screens/ItemSell';
 import Cart from './screens/Cart';
@@ -18,11 +19,14 @@ const Tab = createBottomTabNavigator();
 
 const NavigationHome = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerTitleAlign:'center',
+      headerStyle:{
+        backgroundColor:colors.mainBlue
+      },
+    }}>
       <Stack.Screen
-        options={{
-          headerStyle: {backgroundColor: '#72ACD8'},
-        }}
+        options={{title:'Home'}}
         name='Home'
         component={Home}
       />
@@ -38,12 +42,14 @@ const NavigationHome = () => {
 
 const NavigationSection = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerTitleAlign:'center',
+      headerStyle:{
+        backgroundColor:colors.mainBlue,
+      }
+    }}>
       <Stack.Screen
-        options={{
-          headerStyle: {backgroundColor: '#72ACD8'},
-          title: 'Sezioni',
-        }}
+        options={{title:'Sezioni'}}
         name='SectionsHome'
         component={Section}
       />
@@ -86,17 +92,20 @@ const tabNavigation = () => {
               default:
                 break;
             }
-            return <Ionicons name={iconName} size={20} />;
+            return <Ionicons name={iconName} color={colors.mainPurple} size={20} />;
           },
           tabBarStyle: {
-            backgroundColor: '#72ACD8',
+            backgroundColor: colors.mainBlue,
           },
-          tabBarActiveTintColor: 'black',
-          tabBarInactiveTintColor: 'black',
+          headerStyle: {
+            backgroundColor: colors.mainBlue,
+          },
+          headerTitleAlign:'center',
+          tabBarLabel:() => {return null} ,
         })}
       >
         <Tab.Screen
-          options={{header: () => null}}
+          options={{title:'Home', header:() => null}}
           name='HomeTab'
           component={NavigationHome}
         />
@@ -106,12 +115,12 @@ const tabNavigation = () => {
           component={Cart}
         />
         <Tab.Screen
-          options={{header: () => null, title: 'Sezioni'}}
+          options={{title:'Sezioni', header:() => null}}
           name='sections'
           component={NavigationSection}
         />
         {token ? (
-          <Tab.Screen name='userSettings' component={User} />
+          <Tab.Screen name='userSettings' component={User} options={{title:'Utente'}} />
         ) : (
           <Tab.Screen name='user' component={Auth} />
         )}

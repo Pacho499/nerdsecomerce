@@ -1,6 +1,7 @@
 import {View, TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {removeItem} from '../store/actions/cartAction';
+import { colors } from '../utils/colors';
 const ItemCart = ({item}) => {
   const dispatch = useDispatch();
   return (
@@ -13,14 +14,14 @@ const ItemCart = ({item}) => {
       />
       <View style={{marginLeft: 20, width: '50%'}}>
         <View>
-          <Text>{item.item.title}</Text>
-          <Text>{item.item.cost}€</Text>
-          <Text>Quantità {item.quantity}</Text>
+          <Text style={Styles.description}>Articolo: {item.item.title}</Text>
+          <Text style={Styles.description}>Prezzo: {item.item.cost}€</Text>
+          <Text style={Styles.description}>Quantità: {item.quantity}</Text>
         </View>
       </View>
       <TouchableOpacity onPress={() => dispatch(removeItem(item.item))}>
         <View style={Styles.removeButton}>
-          <Text>X</Text>
+          <Text style={{color:'white'}}>X</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -35,24 +36,24 @@ const Styles = StyleSheet.create({
     marginLeft: 10,
   },
   container: {
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
+    borderColor:colors.mainPurple
   },
   removeButton: {
     padding: 10,
-    backgroundColor: '#72ACD8',
+    backgroundColor: colors.mainPurple,
+    borderWidth:2,
+    borderColor:colors.mainBlue,
     borderRadius: 10,
     marginLeft: 20,
   },
-
-  quantityButton: {
-    backgroundColor: '#72ACD8',
-    margin: 2,
-    padding: 10,
-    borderRadius: 10,
+  description:{
+    fontSize:16,
+    fontWeight:'500'
   },
 });
 

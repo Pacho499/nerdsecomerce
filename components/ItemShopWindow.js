@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { colors } from '../utils/colors';
 
 const ItemShopWindow = ({item, navigation}) => {
   const gotoItemDetail = () => {
@@ -31,18 +32,28 @@ const Styles = StyleSheet.create({
     height: '80%',
     justifyContent: 'center',
     marginTop: 20,
+    borderRadius:20,
+    padding:10,
+    borderColor:colors.mainPurple,
+    backgroundColor:'#fffefe',
+    shadowColor:colors.mainPurple,
+    shadowOpacity:0.6,
+    shadowOffset:{width:5, height:5},
+    elevation:10
   },
   image: {
-    height: 100,
+    height: 70,
     width: '100%',
     marginBottom: 10,
   },
   productName: {
     marginLeft: 5,
-    height: 40,
+    height: 50,
+    fontWeight:'600'
   },
   price: {
     marginLeft: 5,
+    fontWeight:'600'
   },
 });
 

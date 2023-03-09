@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { colors } from '../utils/colors';
 
 const SectionShopWindow = ({typeList, navigation}) => {
   const goToSectionDetail = () => {
@@ -9,24 +10,21 @@ const SectionShopWindow = ({typeList, navigation}) => {
     <View key={typeList[0]['id']} style={Style.section}>
       <TouchableOpacity onPress={goToSectionDetail}>
         <Image source={{uri: typeList[0]['image']}} style={Style.image} />
-        <Text>{typeList[0]['type']}</Text>
+        <Text style={{textAlign:'center', marginTop:10, fontSize:15, fontWeight:'600'}}>{typeList[0]['type']}</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 const Style = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
   image: {
     height: 100,
     width: 100,
   },
   section: {
-    borderWidth: 1,
+    borderWidth: 2,
+    borderColor:colors.mainPurple,
+    borderRadius:20,
     width: 150,
     alignItems: 'center',
     margin: 10,

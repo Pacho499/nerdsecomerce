@@ -33,16 +33,5 @@ const Style = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  image: {
-    height: 100,
-    width: 100,
-  },
-  section: {
-    borderWidth: 1,
-    width: 150,
-    alignItems: 'center',
-    margin: 10,
-    padding: 5,
-  },
 });
 export default Section;

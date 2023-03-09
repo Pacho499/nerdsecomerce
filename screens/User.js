@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import CustomButton from "../components/CustomButton";
 import { logout } from "../store/actions/AuthAction";
 import { useDispatch } from "react-redux";
 import { changeAdress, changeCard } from "../store/actions/AuthAction";
+import { colors } from "../utils/colors";
 const User = () => {
     const dispatch = useDispatch();
     const adress = useSelector(state => state.authUser.adressInfo)
@@ -19,18 +20,19 @@ const User = () => {
         card:''
     })
     return(
-        <View style={Style.container}>
-            <Text>Impostazioni utente</Text>
+        <ScrollView>
+            <View style={Style.container}>
+            <Text style={{fontSize:25, fontWeight:'700'}}>Impostazioni utente</Text>
             <View style={Style.box}>
-                <Text>Il tuo indirizzo di spedizione predefinito</Text>
+                <Text style={{textAlign:'center', fontSize:16, fontWeight:'500', marginVertical:10}}>Il tuo indirizzo di spedizione predefinito</Text>
                 <View>
-                    <Text>Città: {adress.city}</Text>
-                    <Text>Via/Piazza: {adress.adress}</Text>
+                    <Text style={{marginStart:20, marginBottom:15}}>Città: {adress.city}</Text>
+                    <Text style={{marginStart:20}}>Via/Piazza: {adress.adress}</Text>
                 </View>
                 {modifyAdress ? 
-                    <View>
-                        <TextInput style={Style.input} placeholder="città" value={form.city} onChangeText={text => {setForm({...form, city:text})}} />
-                        <TextInput style={Style.input} placeholder="indirizzo" value={form.adress} onChangeText={text => {setForm({...form, adress:text})}} />  
+                    <View style={{justifyContent:'center', alignItems:'center'}}>
+                        <TextInput style={Style.input} placeholder="Città" value={form.city} onChangeText={text => {setForm({...form, city:text})}} />
+                        <TextInput style={Style.input} placeholder="Indirizzo" value={form.adress} onChangeText={text => {setForm({...form, adress:text})}} />  
                         <CustomButton title='Conferma' onPress={() => {
                             dispatch(changeAdress(form.adress, form.city, userId))
                             setModifyAdress(false)
@@ -40,13 +42,13 @@ const User = () => {
                 <CustomButton title={modifyAdress ? "Annulla" : "Cambia indirizzo"} onPress={() => {setModifyAdress(!modifyAdress)}}/>
             </View>
             <View style={Style.box}>
-                <Text>La tua carta predefinita</Text>
-                <View>
-                    <Text>Circuito : {card.card}</Text>
-                    <Text>Numero: {card.cardNumber.substr(12).padStart(16, '*')}</Text>  
+                <Text style={{textAlign:'center', fontSize:16, fontWeight:'500', marginVertical:10}}>La tua carta predefinita</Text>
+                <View >
+                    <Text style={{marginStart:20, marginBottom:15}}>Circuito : {card.card}</Text>
+                    <Text style={{marginStart:20}}>Numero: {card.cardNumber.substr(12).padStart(16, '*')}</Text>  
                 </View>
                 {modifyCard ? 
-                    <View>
+                    <View style={{justifyContent:'center', alignItems:'center'}}>
                         <TextInput style={Style.input} placeholder="Numero" value={form.cardNumber} onChangeText={text => {setForm({...form, cardNumber:text})}} />
                         <TextInput style={Style.input} placeholder="Circuito" value={form.card} onChangeText={text => {setForm({...form, card:text})}} />  
                         <CustomButton title='Conferma' onPress={() => {
@@ -58,7 +60,8 @@ const User = () => {
                 <CustomButton title={modifyCard ? "Annulla" : "Cambia carta"} onPress={() => {setModifyCard(!modifyCard)}}/>
             </View>
             <CustomButton title='LogOut' onPress={() => {dispatch(logout())}} />
-        </View>
+            </View>
+        </ScrollView>
     )
 }
 
@@ -66,21 +69,25 @@ const Style = StyleSheet.create({
     container:{
         flex:1,
         alignItems:'center',
+        justifyContent:'center'
     },
     box:{
         width:'90%',
         margin:'auto',
         borderWidth:2,
-        borderColor:'black',
+        borderColor:colors.mainPurple,
+        borderRadius:20,
         textAlign:'center',
         marginTop:20,
+
     },
     input: {
         width: '80%',
-        marginTop: 30,
+        marginTop: 10,
         paddingBottom: 10,
         paddingHorizontal: 10,
         borderBottomWidth: 2,
+        borderColor:colors.mainBlue
     },
 
 })

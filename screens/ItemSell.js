@@ -55,18 +55,18 @@ const ItemSell = ({route, navigation}) => {
       />
       <View style={Styles.itemContainer}>
         <Image source={{uri: item.image}} style={Styles.image} />
-        <Text>{item.title}</Text>
-        <Text>{item.cost}€</Text>
+        <Text style={Styles.text}>Articolo: {item.title}</Text>
+        <Text style={Styles.text}>Prezzo: {item.cost}€</Text>
       </View>
       <View style={Styles.buttonsContainer}>
         <CustomButton onPress={addItemToCart} title='Aggiungi al carrello' />
         <CustomButton onPress={openModal} title='Compra subito' />
       </View>
-      <Text>Perché hai visto prodotti {item.franchise}</Text>
+      <Text style={Styles.text}>Perché hai visto prodotti {item.franchise}</Text>
       <ScrollView style={Styles.suggested} horizontal={true}>
         {renderSuggestedByFranch}
       </ScrollView>
-      <Text>Perche hai visto prodotto di tipo {item.type}</Text>
+      <Text style={Styles.text}>Perche hai visto prodotto di tipo {item.type}</Text>
       <ScrollView horizontal={true} style={Styles.suggested}>
         {renderSuggestedByType}
       </ScrollView>
@@ -78,7 +78,10 @@ const Styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    backgroundColor: 'red',
+    fontSize:20,
+    marginStart:10,
+    marginVertical:10,
+    fontWeight:'500'
   },
   image: {
     height: 300,
@@ -87,10 +90,10 @@ const Styles = StyleSheet.create({
   },
   itemContainer: {
     justifyContent: 'center',
+    marginVertical:20,
   },
   buttonsContainer: {
     alignItems: 'center',
-    marginTop: 20,
   },
   suggested: {
     height: 250,

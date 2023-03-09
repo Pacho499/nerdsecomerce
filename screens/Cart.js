@@ -17,8 +17,8 @@ const Cart = (props) => {
   return (
     <ScrollView style={Style.container}>
       {renderItem}
-      <View>
-        <Text>Totale: {totalCost.toFixed(2)}€</Text>
+      <View style={{justifyContent:'center', alignItems:'center'}}>
+        <Text style={Style.text}>Prezzo Totale: {totalCost.toFixed(2)}€</Text>
         <CustomButton title={'Acquista'} onPress={gotoCheckOut} />
       </View>
     </ScrollView>
@@ -29,5 +29,11 @@ const Style = StyleSheet.create({
   container: {
     flex: 1,
   },
+  text:{
+    marginStart:10,
+    marginVertical:15,
+    fontSize:15,
+    fontWeight:'500'
+  }
 });
 export default Cart;

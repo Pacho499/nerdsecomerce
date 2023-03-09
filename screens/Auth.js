@@ -19,7 +19,7 @@ const Auth = () => {
   return (
     <KeyboardAvoidingView style={Style.container}>
       <ScrollView>
-      {isLogIn ? <Text>Accedi</Text> : <Text>Iscriviti</Text>}
+      {isLogIn ? <Text style={{fontSize:25, textAlign:'center', marginVertical:10}}>Accedi</Text> : <Text>Iscriviti</Text>}
       <View style={{alignItems:'center', justifyContent:'center'}}>
         <TextInput
           placeholder='email'
