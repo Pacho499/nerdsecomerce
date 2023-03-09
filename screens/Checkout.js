@@ -3,6 +3,7 @@ import {Text, StyleSheet, TextInput, KeyboardAvoidingView} from 'react-native';
 import CustomButton from '../components/CustomButton';
 import UserDataReview from '../components/UserDataReview';
 import { useSelector } from 'react-redux';
+import { colors } from '../utils/colors';
 
 const CheckOut = (props) => {
   const token = useSelector(state => state.authUser.token)
@@ -36,7 +37,7 @@ const buyed = () => {
       { formState.buyed ? <Text>Acquisto effettuato con successo!</Text> :
       token ? <UserDataReview buyed={buyed} /> :
       <>
-        <Text>Indirizzo di spedizione e dati acquirente</Text>
+        <Text style={{fontSize:20, marginTop:20}}>Indirizzo di spedizione e dati acquirente</Text>
       <TextInput
         placeholder='Città'
         style={Style.input}
@@ -55,7 +56,7 @@ const buyed = () => {
         value={formState.client}
         onChangeText={text => setFormState({...formState,client:text})}
       />
-      <Text>Metodo di pagamento</Text>
+      <Text style={{fontSize:20, marginTop:30}}>Metodo di pagamento</Text>
       <TextInput
         placeholder='Numero carta di credito'
         style={Style.input}
@@ -83,7 +84,8 @@ const Style = StyleSheet.create({
   },
   input: {
     width: '80%',
-    marginTop: 30,
+    marginTop: 10,
+    borderColor:colors.mainPurple,
     paddingBottom: 10,
     paddingHorizontal: 10,
     borderBottomWidth: 2,

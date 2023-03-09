@@ -1,4 +1,5 @@
 import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import { colors } from '../utils/colors';
 
 const SuggestedSearchBar = ({input, items, navigation}) => {
   const renderSuggest = items
@@ -21,15 +22,16 @@ const SuggestedSearchBar = ({input, items, navigation}) => {
 const Style = StyleSheet.create({
   container: {
     width: '90%',
-    borderColor: 'black',
-    position: 'absolute',
-    top: 75,
     zIndex: 20,
   },
   text: {
     padding: 10,
-    borderWidth: 1,
-    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: colors.mainPurple,
+    fontSize:16,
+    textAlign:'center',
+    borderRadius:10,
+    marginVertical:2
   },
 });
 

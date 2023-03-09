@@ -11,6 +11,7 @@ import {
 import CustomButton from '../CustomButton';
 import {useSelector} from 'react-redux';
 import UserDataReview from '../UserDataReview';
+import { colors } from '../../utils/colors';
 const BuyNowModal = (props) => {
   const token = useSelector((state) => state.authUser.token);
   const [formState, setFormState] = useState({
@@ -120,7 +121,7 @@ const BuyNowModal = (props) => {
                   {readyToBuy ? (
                     <CustomButton title='Compra' onPress={buyed} />
                   ) : (
-                    <CustomButton title='compila i campi' />
+                    <CustomButton title='compila i campi'/>
                   )}
                 </View>
                 <View style={Styles.container}>
@@ -156,10 +157,11 @@ const Styles = StyleSheet.create({
   },
   input: {
     width: '80%',
-    marginTop: 30,
+    marginTop: 28,
     paddingBottom: 10,
     paddingHorizontal: 10,
     borderBottomWidth: 2,
+    borderColor:colors.mainPurple
   },
   close: {
     height: 350,

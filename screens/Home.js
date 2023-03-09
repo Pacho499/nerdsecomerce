@@ -1,32 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TextInput, ScrollView, Button} from 'react-native';
+import {View, StyleSheet, TextInput, ScrollView} from 'react-native';
 import HomeShopWindow from '../components/HomeShopWindow';
-import Axios from 'axios';
 import {fetchItems} from '../store/actions/itemSellActions';
 import {useDispatch, useSelector} from 'react-redux';
 import SuggestedSearchBar from '../components/SuggestedSearchBar';
-//import ITEMS from '../fakeItemSell/ItemSells';
+import { colors } from '../utils/colors';
 
 const Home = (props) => {
-  //use at the end to structure the databse + create a button <Button title='carica dati'onPress={onSubmitData}/>
-  // const onSubmitData = async () => {
-  //   const url = 'https://nerdsecomerce-default-rtdb.firebaseio.com/itemSell.json'
-  //   for (const item in ITEMS){
-  //     try {
-  //       const data = await Axios.post(url, {
-  //       id : ITEMS[item].id,
-  //       image : ITEMS[item].image,
-  //       title : ITEMS[item].title,
-  //       type : ITEMS[item].type,
-  //       cost : ITEMS[item].cost,
-  //       franchise : ITEMS[item].franchise
-  //     })
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-
-  //   }
-  // };
   const dispatch = useDispatch();
   const [text, setText] = useState('');
   const [viewSuggest, setViewSuggest] = useState(false);
@@ -65,7 +45,6 @@ const Home = (props) => {
   });
   return (
     <View style={styles.container}>
-      {/* <Button title='carica dati'onPress={onSubmitData}/> */}
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -95,8 +74,10 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 25,
     width: '90%',
-    borderWidth: 1,
-    padding: 10,
+    borderWidth: 2,
+    borderColor:colors.mainPurple,
+    padding: 5,
+    paddingLeft:20,
     borderRadius: 20,
   },
   inputContainer: {
