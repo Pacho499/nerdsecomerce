@@ -1,4 +1,4 @@
-import {ADD_ITEM, REMOVE_ITEM, FAST_ADD_ITEM} from '../actions/cartAction';
+import {ADD_ITEM, REMOVE_ITEM, REMOVE_ALL} from '../actions/cartAction';
 const initialState = {
   items: {},
   cost: 0,
@@ -21,7 +21,6 @@ const cartReducer = (state = initialState, action) => {
         items[action.payload.id]['quantity'] =
           items[action.payload.id]['quantity'] + 1;
       }
-
       return {
         ...state,
         items: items,
@@ -39,13 +38,11 @@ const cartReducer = (state = initialState, action) => {
           Math.round((state.cost - action.payload.cost * quantity) * 100) / 100,
       };
     }
-    case FAST_ADD_ITEM: {
-      const items = state.items;
-      items[action.payload]['quantity'] = items[action.payload]['quantity'] + 1;
+    case REMOVE_ALL:{
       return {
-        ...state,
-        items: items,
-      };
+        cost:0,
+        items:{}
+      }
     }
     default:
       return {

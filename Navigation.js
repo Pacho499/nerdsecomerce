@@ -125,6 +125,7 @@ const tabNavigation = () => {
     dispatch(retrieveData());
   }, [dispatch]);
   const token = useSelector((state) => state.authUser.token);
+  const items = useSelector((state) => state.cartReducer.items);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -172,7 +173,7 @@ const tabNavigation = () => {
         />
         <Tab.Screen
           name='Cart'
-          options={{title: 'Carrello'}}
+          options={() => ({title: 'Carrello', tabBarBadge:(Object.values(items).length > 0 ? Object.values(items).length : null)})}
           component={Cart}
         />
         <Tab.Screen

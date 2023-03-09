@@ -4,9 +4,11 @@ import CustomButton from '../components/CustomButton';
 import UserDataReview from '../components/UserDataReview';
 import { useSelector } from 'react-redux';
 import { colors } from '../utils/colors';
-
+import { removeAll } from '../store/actions/cartAction';
+import { useDispatch } from 'react-redux';
 const CheckOut = (props) => {
   const token = useSelector(state => state.authUser.token)
+  const dispatch = useDispatch();
   const [formState, setFormState] = useState({
     adress: '',
     creditCart: '',
@@ -29,6 +31,7 @@ const buyed = () => {
   setFormState({...formState, buyed:true})
    setTimeout(() => {
        setFormState({...formState, city:'', adress:'', creditCart:'', CVV:'', buyed:false})
+       dispatch(removeAll())
        props.navigation.navigate('Home')
    }, 3000);
 }
@@ -58,7 +61,7 @@ const buyed = () => {
       />
       <Text style={{fontSize:20, marginTop:30}}>Metodo di pagamento</Text>
       <TextInput
-        placeholder='Numero carta di credito'
+        placeholder='Numero carta di credito (16 numeri)'
         style={Style.input}
         value={formState.creditCart}
         onChangeText={text => setFormState({...formState,creditCart:text})}
