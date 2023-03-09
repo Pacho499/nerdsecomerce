@@ -17,8 +17,30 @@ const User = () => {
         city:'',
         adress:'',
         cardNumber:'',
-        card:''
-    })
+        card:'',
+        errorCard:false,
+        errorAdress:false,
+    })   
+    
+    const changeCardButton = () => {
+        if(form.cardNumber.length !== 16 || form.card < 1) {
+            setForm({...form, errorCard:true})
+        } else {
+            dispatch(changeCard(form.cardNumber, form.card, userId))
+            setModifyCard(false)
+            setForm({...form, errorCard:true})
+        }
+    }
+
+    const changeAdressButton = () => {
+        if(form.adress === '' || form.city === ''){
+            setForm({...form, errorAdress:true})
+        } else {
+            dispatch(changeAdress(form.adress, form.city, userId))
+            setModifyAdress(false)
+            setForm({...form, errorAdress:false})
+        }
+    }
     return(
         <ScrollView>
             <View style={Style.container}>
@@ -33,10 +55,8 @@ const User = () => {
                     <View style={{justifyContent:'center', alignItems:'center'}}>
                         <TextInput style={Style.input} placeholder="Città" value={form.city} onChangeText={text => {setForm({...form, city:text})}} />
                         <TextInput style={Style.input} placeholder="Indirizzo" value={form.adress} onChangeText={text => {setForm({...form, adress:text})}} />  
-                        <CustomButton title='Conferma' onPress={() => {
-                            dispatch(changeAdress(form.adress, form.city, userId))
-                            setModifyAdress(false)
-                            }}/>
+                        {form.errorAdress ? <Text style={Style.error}>Tutti i campi devono essere compilati</Text> : null}
+                        <CustomButton title='Conferma' onPress={() => {changeAdressButton()}}/>
                     </View>                    
                 :null}
                 <CustomButton title={modifyAdress ? "Annulla" : "Cambia indirizzo"} onPress={() => {setModifyAdress(!modifyAdress)}}/>
@@ -51,13 +71,14 @@ const User = () => {
                     <View style={{justifyContent:'center', alignItems:'center'}}>
                         <TextInput style={Style.input} placeholder="Numero" value={form.cardNumber} onChangeText={text => {setForm({...form, cardNumber:text})}} />
                         <TextInput style={Style.input} placeholder="Circuito" value={form.card} onChangeText={text => {setForm({...form, card:text})}} />  
-                        <CustomButton title='Conferma' onPress={() => {
-                            dispatch(changeCard(form.cardNumber, form.card, userId))
-                            setModifyCard(false)
-                            }}/>
+                        {form.errorCard ? <Text style={Style.error}>Il numero deve contenere 16 caratteri senza spazi</Text> : null}
+                        <CustomButton title='Conferma' onPress={() => {changeCardButton()}}/>
                     </View>                    
                 :null}
-                <CustomButton title={modifyCard ? "Annulla" : "Cambia carta"} onPress={() => {setModifyCard(!modifyCard)}}/>
+                <CustomButton title={modifyCard ? "Annulla" : "Cambia carta"} onPress={() => {
+                    setModifyCard(!modifyCard)
+                    setForm({...form, errorCard:false})
+                    }}/>
             </View>
             <CustomButton title='LogOut' onPress={() => {dispatch(logout())}} />
             </View>
@@ -72,14 +93,15 @@ const Style = StyleSheet.create({
         justifyContent:'center'
     },
     box:{
-        width:'90%',
+        width:'95%',
         margin:'auto',
         borderWidth:2,
         borderColor:colors.mainPurple,
         borderRadius:20,
         textAlign:'center',
         marginTop:20,
-
+        justifyContent:'center',
+        alignItems:'center'
     },
     input: {
         width: '80%',
@@ -89,6 +111,12 @@ const Style = StyleSheet.create({
         borderBottomWidth: 2,
         borderColor:colors.mainBlue
     },
+    error: {
+        textAlign:'center', 
+        color:colors.error, 
+        fontSize:20, 
+        marginVertical:20
+    }
 
 })
 

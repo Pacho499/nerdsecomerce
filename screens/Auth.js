@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ScrollView} from 'react-native';
 import CustomButton from '../components/CustomButton'
-import { useState } from 'react';
-import { signUp, logIn } from '../store/actions/AuthAction';
+import { useState, useEffect } from 'react';
+import { signUp, logIn, removeError } from '../store/actions/AuthAction';
 import { useDispatch } from 'react-redux';
 import { colors } from '../utils/colors';
+import { useSelector } from 'react-redux';
 const Auth = () => {
   const dispatch = useDispatch()
   const [form, setForm] = useState({
@@ -16,6 +17,8 @@ const Auth = () => {
     adress:'',
     city:''
   })
+  const isError = useSelector((state) => state.authUser.error)
+  const errorMessage = useSelector((state) => state.authUser.errorMessage)
   const [isLogIn, setIsLogIn] = useState(true)
   return (
     <KeyboardAvoidingView style={Style.container}>
@@ -72,12 +75,15 @@ const Auth = () => {
             onChangeText={text => {setForm({...form, card:text})}}
           />
         </> 
-          
         }
+        {isError ? <Text style={{textAlign:'center', color:colors.error, fontSize:20, marginVertical:20}}>{errorMessage}</Text> : null}
       </View>
       {isLogIn ? <View style={{alignItems:'center', justifyContent:'center'}}>
         <CustomButton title={'Accedi'} onPress={() => {dispatch(logIn(form.email, form.password))}}/>
-        <CustomButton title={'Iscriviti'} onPress={() => setIsLogIn(false)}/>
+        <CustomButton title={'Iscriviti'} onPress={() => {
+          setIsLogIn(false)
+          dispatch(removeError())
+          }}/>
       </View> : 
       <View style={{alignItems:'center', justifyContent:'center'}}>
         <CustomButton title={'Accedi'} onPress={() => setIsLogIn(true)}/>

@@ -5,6 +5,8 @@ import {
   RETRIEVE_DATA,
   CHANGE_ADRESS,
   CHANGE_CARD,
+  ERROR,
+  ERROR_REMOVE
 } from '../actions/AuthAction';
 
 const initialState = {
@@ -13,6 +15,8 @@ const initialState = {
   username: '',
   cardData: {},
   adressInfo: {},
+  error:false,
+  errorMessage: ''
 };
 
 const authUser = (state = initialState, action) => {
@@ -74,6 +78,39 @@ const authUser = (state = initialState, action) => {
         cardData: action.userDatas.cardData,
         adressInfo: action.userDatas.adressInfo,
       };
+    }
+    case ERROR:{
+      let errorMessage
+      console.log(action.payload.error.message)
+      switch (action.payload.error.message) {
+        case 'INVALID_EMAIL':
+          errorMessage = 'E-mail Errata'
+          break;
+        case 'INVALID_PASSWORD':
+          errorMessage = 'Password Errata'
+          break;
+        case 'EMAIL_EXISTS':
+          errorMessage = 'Email Già presente'
+          break;
+        case 'WEAK_PASSWORD : Password should be at least 6 characters':
+          errorMessage = 'Password troppo corta. minimo 6 caratteri'
+          break;
+        default:
+          errorMessage = 'Errore di connessione'
+          break;
+      }
+      return {
+        ...state,
+        error:true,
+        errorMessage: errorMessage
+      }
+    }
+    case ERROR_REMOVE:{
+      return{
+        ...state,
+        error: false,
+        errorMessage:''
+      }
     }
     default:
       return {
