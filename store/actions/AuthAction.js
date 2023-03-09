@@ -78,20 +78,26 @@ export const retrieveData = () => {
   return async (dispatch) => {
     const data = await AsyncStorage.getItem('userData');
     const myData = JSON.parse(data);
-    const userDatas = await axios.get(
+    console.log(data)
+    let userDatas = {}
+    if (data !== null) {
+      userDatas = await axios.get(
       `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${myData.userId}.json`,
-    );
-    dispatch({
-      type: RETRIEVE_DATA,
-      userDatas: userDatas.data,
-      firebase: myData,
-    });
+      );
+      dispatch({
+        type: RETRIEVE_DATA,
+        userDatas: userDatas.data,
+        firebase: myData,
+      });
+    }
+    
+   
   };
 };
 
 export const changeAdress = (adress, city, userId) => {
   return async (dispatch) => {
-    const data = await axios.put(
+    await axios.put(
       `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${userId}/adressInfo.json`,
       {
         adress: adress,
@@ -103,7 +109,7 @@ export const changeAdress = (adress, city, userId) => {
 };
 export const changeCard = (cardNumber, card, userId) => {
   return async (dispatch) => {
-    const data = await axios.put(
+    await axios.put(
       `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${userId}/cardData.json`,
       {
         cardNumber: cardNumber,
