@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import {
   TouchableOpacity,
   Text,
@@ -16,16 +17,17 @@ const BuyNowModal = (props) => {
   const token = useSelector((state) => state.authUser.token);
   const [formState, setFormState] = useState({
     adress: '',
-    creditCart: '',
+    cardNumber: '',
     CVV: '',
     city: '',
+    card:'',
     buyed: false,
   });
   const [readyToBuy, setReadyToBuy] = useState(false);
   const [standardUserData, setStandardUserData] = useState(true);
 
   useEffect(() => {
-    if (formState.CVV.length === 3 && formState.creditCart.length === 16) {
+    if (formState.CVV.length === 3 && formState.cardNumber.length === 16) {
       setReadyToBuy(true);
     } else {
       setReadyToBuy(false);
@@ -39,7 +41,8 @@ const BuyNowModal = (props) => {
         ...formState,
         city: '',
         adress: '',
-        creditCart: '',
+        cardNumber: '',
+        card:'',
         CVV: '',
         buyed: false,
       });
@@ -69,6 +72,7 @@ const BuyNowModal = (props) => {
           }}
         >
           <Text>Acquisto effettuato correttamente</Text>
+          <Ionicons name="md-checkmark-done-circle" size={30} color="green" />
         </View>
       ) : (
         <ScrollView>
@@ -105,9 +109,17 @@ const BuyNowModal = (props) => {
                   <TextInput
                     placeholder='Numero carta di credito (16 numeri)'
                     style={Styles.input}
-                    value={formState.creditCart}
+                    value={formState.cardNumber}
                     onChangeText={(text) => {
-                      setFormState({...formState, creditCart: text});
+                      setFormState({...formState, cardNumber: text});
+                    }}
+                  />
+                  <TextInput
+                    placeholder='Circuito'
+                    style={Styles.input}
+                    value={formState.card}
+                    onChangeText={(text) => {
+                      setFormState({...formState, card: text});
                     }}
                   />
                   <TextInput

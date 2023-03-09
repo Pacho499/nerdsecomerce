@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Text, StyleSheet, TextInput, KeyboardAvoidingView} from 'react-native';
+import {Text, StyleSheet, TextInput, KeyboardAvoidingView, View} from 'react-native';
 import CustomButton from '../components/CustomButton';
 import UserDataReview from '../components/UserDataReview';
 import { useSelector } from 'react-redux';
 import { colors } from '../utils/colors';
 import { removeAll } from '../store/actions/cartAction';
 import { useDispatch } from 'react-redux';
+import Ionicons from '@expo/vector-icons/Ionicons';
 const CheckOut = (props) => {
   const token = useSelector(state => state.authUser.token)
   const dispatch = useDispatch();
@@ -37,8 +38,14 @@ const buyed = () => {
 }
   return (
     <KeyboardAvoidingView style={Style.container}>
-      { formState.buyed ? <Text>Acquisto effettuato con successo!</Text> :
-      token ? <UserDataReview buyed={buyed} /> :
+      { formState.buyed ? 
+      <>
+        <Text style={{textAlign:'center'}}>Acquisto effettuato con successo!</Text> 
+        <Ionicons name="md-checkmark-done-circle" size={30} color="green" />
+      </>
+      
+      :
+      token ? <UserDataReview buyed={buyed} navigation={props.navigation} /> :
       <>
         <Text style={{fontSize:20, marginTop:20}}>Indirizzo di spedizione e dati acquirente</Text>
       <TextInput
@@ -84,6 +91,7 @@ const Style = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent:'center'
   },
   input: {
     width: '80%',
