@@ -62,7 +62,7 @@ const CheckOut = (props) => {
         <TransitionDone />
       ) : token ? (
         <>
-          <UserDataReview buyed={buyed} navigation={props.navigation} />
+          <UserDataReview buyed={buyed} isFastBuy={true} navigation={props.navigation} />
           <TextInput
             placeholder='CVV'
             style={Style.input}
