@@ -23,7 +23,6 @@ const CheckOut = (props) => {
   const [readyToBuy, setReadyToBuy] = useState(false);
 
   useEffect(() => {
-    console.log(formState);
     if (formState.CVV.length === 3 && formState.creditCart.length === 16) {
       setReadyToBuy(true);
     } else {
@@ -32,7 +31,6 @@ const CheckOut = (props) => {
   }, [formState]);
 
   const buyed = () => {
-    console.log(formState.CVV);
     if (formState.CVV.length !== 3) {
       setFormState({...formState, buyed: true, error: true});
       setTimeout(() => {

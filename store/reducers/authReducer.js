@@ -86,7 +86,6 @@ const authUser = (state = initialState, action) => {
     }
     case ERROR: {
       let errorMessage;
-      console.log(action.payload.error.message);
       switch (action.payload.error.message) {
         case 'INVALID_EMAIL':
           errorMessage = 'E-mail Errata';
