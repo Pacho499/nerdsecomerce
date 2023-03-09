@@ -78,7 +78,6 @@ export const retrieveData = () => {
   return async (dispatch) => {
     const data = await AsyncStorage.getItem('userData');
     const myData = JSON.parse(data);
-    console.log(data)
     let userDatas = {}
     if (data !== null) {
       userDatas = await axios.get(
