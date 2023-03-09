@@ -67,7 +67,7 @@ const NavigationHome = () => {
                   <CustomHeader
                     title='CheckOut'
                     back={true}
-                    backPage={'Cart'}
+                    backPage={'Home'}
                   />
                 ),
               }
