@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import CustomButton from '../components/CustomButton';
 import {logout} from '../store/actions/AuthAction';
@@ -11,7 +18,9 @@ const User = () => {
   const adress = useSelector((state) => state.authUser.adressInfo);
   const card = useSelector((state) => state.authUser.cardData);
   const userId = useSelector((state) => state.authUser.userId);
-  const userName = useSelector((state) => state.authUser.username)
+  const userName = useSelector((state) => state.authUser.username);
+  const loadingAdress = useSelector((state) => state.authUser.adressInfo.loading)
+  const loadingCard = useSelector((state) => state.authUser.cardData.loading)
   const [modifyAdress, setModifyAdress] = useState(false);
   const [modifyCard, setModifyCard] = useState(false);
   const [form, setForm] = useState({
@@ -39,26 +48,24 @@ const User = () => {
     } else {
       dispatch(changeAdress(form.adress, form.city, userId));
       setModifyAdress(false);
-      setForm({...form, errorAdress: false});
+      setForm({...form, errorAdress: false, loadingAdress: false});
     }
   };
-  
+
   return (
     <ScrollView>
       <View style={Style.container}>
-        <Text style={{fontSize: 25, fontWeight: '700'}}>
-        Ciao {userName}
-        </Text>
+        <Text style={{fontSize: 25, fontWeight: '700'}}>Ciao {userName}</Text>
         <View style={Style.box}>
           <Text style={Style.title}>
             Il tuo indirizzo di spedizione predefinito
           </Text>
-          <View>
+          {loadingAdress ? <ActivityIndicator size='small' color={colors.mainPurple} /> : <View>
             <Text style={{marginStart: 20, marginBottom: 15}}>
               Città: {adress.city}
             </Text>
             <Text style={{marginStart: 20}}>Via/Piazza: {adress.adress}</Text>
-          </View>
+          </View>}
           {modifyAdress ? (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <TextInput
@@ -100,14 +107,14 @@ const User = () => {
         </View>
         <View style={Style.box}>
           <Text style={Style.title}>La tua carta predefinita</Text>
-          <View>
+          {loadingCard ? <ActivityIndicator size='small' color={colors.mainPurple} /> : <View>
             <Text style={{marginStart: 20, marginBottom: 15}}>
               Circuito : {card.card}
             </Text>
             <Text style={{marginStart: 20}}>
               Numero: {card.cardNumber.substr(12).padStart(16, '*')}
             </Text>
-          </View>
+          </View>}
           {modifyCard ? (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <TextInput

@@ -173,7 +173,13 @@ const tabNavigation = () => {
         />
         <Tab.Screen
           name='Cart'
-          options={() => ({title: 'Carrello', tabBarBadge:(Object.values(items).length > 0 ? Object.values(items).length : null)})}
+          options={() => ({
+            title: 'Carrello',
+            tabBarBadge:
+              Object.values(items).length > 0
+                ? Object.values(items).length
+                : null,
+          })}
           component={Cart}
         />
         <Tab.Screen

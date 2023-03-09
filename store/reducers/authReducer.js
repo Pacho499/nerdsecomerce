@@ -7,6 +7,8 @@ import {
   CHANGE_CARD,
   ERROR,
   ERROR_REMOVE,
+  CHANGE_ADRESS_START,
+  CHANGE_CARD_START
 } from '../actions/AuthAction';
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   adressInfo: {},
   error: false,
   errorMessage: '',
+  loading:false
 };
 
 const authUser = (state = initialState, action) => {
@@ -58,6 +61,7 @@ const authUser = (state = initialState, action) => {
         adressInfo: {
           city: action.city,
           adress: action.adress,
+          loading:false
         },
       };
     }
@@ -67,6 +71,7 @@ const authUser = (state = initialState, action) => {
         cardData: {
           cardNumber: action.cardNumber,
           card: action.card,
+          loading:false
         },
       };
     }
@@ -111,6 +116,22 @@ const authUser = (state = initialState, action) => {
         error: false,
         errorMessage: '',
       };
+    }
+    case CHANGE_ADRESS_START:{
+      return{
+        ...state,
+        adressInfo:{
+          loading:true
+        }
+      }
+    }
+    case CHANGE_CARD_START:{
+      return{
+        ...state,
+        cardData:{
+          loading:true
+        }
+      }
     }
     default:
       return {

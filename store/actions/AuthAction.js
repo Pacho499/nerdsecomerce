@@ -6,6 +6,8 @@ const LOG_OUT = 'LOG_OUT';
 const RETRIEVE_DATA = 'RETRIEVE_DATA';
 const CHANGE_ADRESS = 'CHANGE_ADRESS';
 const CHANGE_CARD = 'CHANGE_CARD';
+const CHANGE_ADRESS_START = 'CHANGE_ADRESS_START';
+const CHANGE_CARD_START = 'CHANGE_CARD_START';
 const ERROR = 'ERROR';
 const ERROR_REMOVE = 'ERROR_REMOVE';
 
@@ -104,7 +106,9 @@ export const retrieveData = () => {
 
 export const changeAdress = (adress, city, userId) => {
   return async (dispatch) => {
-    await axios.put(
+    try {
+      dispatch({type:CHANGE_ADRESS_START})
+      await axios.put(
       `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${userId}/adressInfo.json`,
       {
         adress: adress,
@@ -112,11 +116,16 @@ export const changeAdress = (adress, city, userId) => {
       },
     );
     dispatch({type: CHANGE_ADRESS, adress: adress, city: city});
+    } catch (error) {
+      console.log(error)
+    }
   };
 };
 export const changeCard = (cardNumber, card, userId) => {
   return async (dispatch) => {
-    await axios.put(
+    dispatch({type:CHANGE_CARD_START})
+    try {
+      await axios.put(
       `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${userId}/cardData.json`,
       {
         cardNumber: cardNumber,
@@ -124,6 +133,10 @@ export const changeCard = (cardNumber, card, userId) => {
       },
     );
     dispatch({type: CHANGE_CARD, cardNumber: cardNumber, card: card});
+    } catch (error) {
+      console.log(error)
+    }
+    
   };
 };
 
@@ -138,4 +151,6 @@ export {
   CHANGE_CARD,
   ERROR,
   ERROR_REMOVE,
+  CHANGE_ADRESS_START,
+  CHANGE_CARD_START
 };
