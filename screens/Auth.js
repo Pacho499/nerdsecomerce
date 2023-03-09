@@ -4,6 +4,7 @@ import CustomButton from '../components/CustomButton'
 import { useState } from 'react';
 import { signUp, logIn } from '../store/actions/AuthAction';
 import { useDispatch } from 'react-redux';
+import { colors } from '../utils/colors';
 const Auth = () => {
   const dispatch = useDispatch()
   const [form, setForm] = useState({
@@ -19,10 +20,10 @@ const Auth = () => {
   return (
     <KeyboardAvoidingView style={Style.container}>
       <ScrollView>
-      {isLogIn ? <Text style={{fontSize:25, textAlign:'center', marginVertical:10}}>Accedi</Text> : <Text>Iscriviti</Text>}
+      {isLogIn ? <Text style={{fontSize:25, textAlign:'center', marginVertical:10}}>Accedi</Text> : <Text style={{fontSize:25, textAlign:'center', marginVertical:10}}>Iscriviti</Text>}
       <View style={{alignItems:'center', justifyContent:'center'}}>
         <TextInput
-          placeholder='email'
+          placeholder='E-mail'
           keyboardType='email-address'
           style={Style.input}
           value={form.email}
@@ -43,7 +44,7 @@ const Auth = () => {
           value={form.name}
           onChangeText={text => {setForm({...form, name:text})}}
         />
-        <Text>Indirizzo di spedizione</Text>
+        <Text style={{fontSize:15, fontWeight:'500', marginTop:30}}>Indirizzo di spedizione</Text>
         <TextInput
           placeholder='Città'
           style={Style.input}
@@ -56,7 +57,7 @@ const Auth = () => {
           value={form.adress}
           onChangeText={text => {setForm({...form, adress:text})}}
         />
-          <Text>Carta di credito</Text>
+          <Text style={{fontSize:15, fontWeight:'500', marginTop:30}}>Carta di credito</Text>
           <TextInput
             placeholder='Numero carta (16 numeri)'
             keyboardType='number-pad'
@@ -97,6 +98,7 @@ const Style = StyleSheet.create({
   input: {
     width: '80%',
     marginTop: 30,
+    borderColor:colors.mainPurple,
     paddingBottom: 10,
     paddingHorizontal: 10,
     borderBottomWidth: 2,
