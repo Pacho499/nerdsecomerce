@@ -7,6 +7,8 @@ import { colors } from '../utils/colors';
 import { removeAll } from '../store/actions/cartAction';
 import { useDispatch } from 'react-redux';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import TransitionError from '../components/TransitionError';
+import TransitionDone from '../components/TransitionDone';
 const CheckOut = (props) => {
   const token = useSelector(state => state.authUser.token)
   const dispatch = useDispatch();
@@ -17,10 +19,12 @@ const CheckOut = (props) => {
     city:  '',
     client: '',
     buyed:false,
+    error:false
 })
 const[readyToBuy, setReadyToBuy] = useState(false)
 
 useEffect(() => {
+  console.log(formState)
   if((formState.CVV.length === 3) && (formState.creditCart.length === 16) ){
     setReadyToBuy(true)
   }else{
@@ -29,23 +33,41 @@ useEffect(() => {
 }, [formState])
 
 const buyed = () => {
-  setFormState({...formState, buyed:true})
-   setTimeout(() => {
-       setFormState({...formState, city:'', adress:'', creditCart:'', CVV:'', buyed:false})
-       dispatch(removeAll())
-       props.navigation.navigate('Home')
-   }, 3000);
+  console.log(formState.CVV)
+  if(formState.CVV.length !== 3){
+         setFormState({...formState, buyed:true, error:true})
+          setTimeout(() => {
+            props.navigation.navigate('Home')
+          }, 3000);
+  }else{
+        setFormState({...formState, buyed:true, error:false})
+        dispatch(removeAll())
+        setTimeout(() => {
+          setFormState({...formState, city:'', adress:'', creditCart:'', CVV:'', buyed:false})
+          props.navigation.navigate('Home')
+        }, 4000);
+       }
 }
   return (
     <KeyboardAvoidingView style={Style.container}>
-      { formState.buyed ? 
-      <>
-        <Text style={{textAlign:'center'}}>Acquisto effettuato con successo!</Text> 
-        <Ionicons name="md-checkmark-done-circle" size={30} color="green" />
-      </>
-      
+      { formState.error ? 
+        <TransitionError/>
+        : 
+        formState.buyed ? 
+        <TransitionDone/>
       :
-      token ? <UserDataReview buyed={buyed} navigation={props.navigation} /> :
+      token ? 
+      <>
+       <UserDataReview buyed={buyed} navigation={props.navigation} />
+       <TextInput
+        placeholder='CVV'
+        style={Style.input}
+        value={formState.CVV}
+        onChangeText={text => setFormState({...formState,CVV:text})}
+        />
+        <CustomButton onPress={buyed} title={'acquista'} /> 
+      </>
+      :
       <>
         <Text style={{fontSize:20, marginTop:20}}>Indirizzo di spedizione e dati acquirente</Text>
       <TextInput

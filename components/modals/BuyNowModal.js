@@ -12,7 +12,9 @@ import {
 import CustomButton from '../CustomButton';
 import {useSelector} from 'react-redux';
 import UserDataReview from '../UserDataReview';
-import { colors } from '../../utils/colors';
+import {colors} from '../../utils/colors';
+import TransitionDone from '../TransitionDone';
+import TransitionError from '../TransitionError';
 const BuyNowModal = (props) => {
   const token = useSelector((state) => state.authUser.token);
   const [formState, setFormState] = useState({
@@ -20,8 +22,9 @@ const BuyNowModal = (props) => {
     cardNumber: '',
     CVV: '',
     city: '',
-    card:'',
+    card: '',
     buyed: false,
+    error: false,
   });
   const [readyToBuy, setReadyToBuy] = useState(false);
   const [standardUserData, setStandardUserData] = useState(true);
@@ -35,19 +38,26 @@ const BuyNowModal = (props) => {
   }, [formState]);
 
   const buyed = () => {
-    setFormState({...formState, buyed: true});
-    setTimeout(() => {
-      setFormState({
-        ...formState,
-        city: '',
-        adress: '',
-        cardNumber: '',
-        card:'',
-        CVV: '',
-        buyed: false,
-      });
-      props.navigation.navigate('Home');
-    }, 3000);
+    if (formState.CVV.length !== 3) {
+      setFormState({...formState, buyed: true, error: true});
+      setTimeout(() => {
+        props.navigation.navigate('Home');
+      }, 3000);
+    } else {
+      setFormState({...formState, buyed: true, error: false});
+      dispatch(removeAll());
+      setTimeout(() => {
+        setFormState({
+          ...formState,
+          city: '',
+          adress: '',
+          creditCart: '',
+          CVV: '',
+          buyed: false,
+        });
+        props.navigation.navigate('Home');
+      }, 4000);
+    }
   };
 
   const goToLogIn = () => {
@@ -62,17 +72,13 @@ const BuyNowModal = (props) => {
       animationType='slide'
       visible={props.visible}
     >
-      {formState.buyed ? (
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-            backgroundColor: 'white',
-          }}
-        >
-          <Text>Acquisto effettuato correttamente</Text>
-          <Ionicons name="md-checkmark-done-circle" size={30} color="green" />
+      {formState.error ? (
+        <View style={Styles.transitionContainer}>
+          <TransitionError />
+        </View>
+      ) : formState.buyed ? (
+        <View style={Styles.transitionContainer}>
+          <TransitionDone />
         </View>
       ) : (
         <ScrollView>
@@ -81,12 +87,23 @@ const BuyNowModal = (props) => {
           </TouchableOpacity>
           <View style={Styles.modal}>
             {token && standardUserData ? (
-              <UserDataReview
-                buyed={buyed}
-                changeData={() => {
-                  setStandardUserData(false);
-                }}
-              />
+              <View style={{alignItems: 'center'}}>
+                <UserDataReview
+                  buyed={buyed}
+                  changeData={() => {
+                    setStandardUserData(false);
+                  }}
+                />
+                <TextInput
+                  placeholder='CVV (3 numeri)'
+                  style={Styles.input}
+                  value={formState.CVV}
+                  onChangeText={(text) => {
+                    setFormState({...formState, CVV: text});
+                  }}
+                />
+                <CustomButton title='Compra' onPress={buyed} />
+              </View>
             ) : (
               <>
                 <View style={Styles.formContainer}>
@@ -133,7 +150,7 @@ const BuyNowModal = (props) => {
                   {readyToBuy ? (
                     <CustomButton title='Compra' onPress={buyed} />
                   ) : (
-                    <CustomButton title='compila i campi'/>
+                    <CustomButton title='compila i campi' />
                   )}
                 </View>
                 <View style={Styles.container}>
@@ -173,7 +190,7 @@ const Styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 10,
     borderBottomWidth: 2,
-    borderColor:colors.mainPurple
+    borderColor: colors.mainPurple,
   },
   close: {
     height: 350,
@@ -192,6 +209,12 @@ const Styles = StyleSheet.create({
   boxUser: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  transitionContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    backgroundColor: 'white',
   },
 });
 

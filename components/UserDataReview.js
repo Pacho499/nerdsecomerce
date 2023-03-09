@@ -3,10 +3,9 @@ import CustomButton from './CustomButton';
 import {useSelector} from 'react-redux';
 import {useState} from 'react';
 import { colors } from '../utils/colors';
-const UserDataReview = ({buyed, navigation}) => {
+const UserDataReview = ({navigation}) => {
   const adressInfo = useSelector((state) => state.authUser.adressInfo);
   const card = useSelector((state) => state.authUser.cardData);
-  const [CVV, setCVV] = useState('');
   return (
     <View style={Styles.container}>
       <Text style={{marginVertical: 20, fontSize: 18, textAlign: 'center', fontWeight:'500'}}>
@@ -23,17 +22,8 @@ const UserDataReview = ({buyed, navigation}) => {
           <Text style={{marginBottom: 10}}>Circuito : {card.card}</Text>
           <Text>Numero carta : {card.cardNumber.substr(12).padStart(16, '*')}</Text>
         </View>
-        
         <CustomButton title='Cambia dati' onPress={() => navigation.navigate('userSettings')} />
       </View>
-      <TextInput
-        placeholder='CVV (3 numeri)'
-        keyboardType='number-pad'
-        style={Styles.input}
-        value={CVV}
-        onChangeText={(text) => setCVV(text)}
-      />
-      <CustomButton title='acquista' onPress={buyed} />
     </View>
   );
 };

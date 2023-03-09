@@ -16,11 +16,18 @@ const Cart = (props) => {
 
   return (
     <ScrollView style={Style.container}>
-      {renderItem}
-      <View style={{justifyContent:'center', alignItems:'center'}}>
-        <Text style={Style.text}>Prezzo Totale: {totalCost.toFixed(2)}€</Text>
-        <CustomButton title={'Acquista'} onPress={gotoCheckOut} />
-      </View>
+      {
+        Object.values(items).length === 0 
+        ? <Text style={{textAlign:'center', marginTop:100, fontSize:20}}>Aggiungi qualcosa al tuo carrello!</Text> 
+        :  
+        <>
+        {renderItem}
+        <View style={{justifyContent:'center', alignItems:'center'}}>
+          <Text style={Style.text}>Prezzo Totale: {totalCost.toFixed(2)}€</Text>
+          <CustomButton title={'Acquista'} onPress={gotoCheckOut} />
+        </View>
+        </>
+      } 
     </ScrollView>
   );
 };
