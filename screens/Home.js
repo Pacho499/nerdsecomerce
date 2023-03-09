@@ -4,7 +4,7 @@ import HomeShopWindow from '../components/HomeShopWindow';
 import {fetchItems} from '../store/actions/itemSellActions';
 import {useDispatch, useSelector} from 'react-redux';
 import SuggestedSearchBar from '../components/SuggestedSearchBar';
-import { colors } from '../utils/colors';
+import {colors} from '../utils/colors';
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
     marginTop: 25,
     width: '90%',
     borderWidth: 2,
-    borderColor:colors.mainPurple,
+    borderColor: colors.mainPurple,
     padding: 5,
-    paddingLeft:20,
+    paddingLeft: 20,
     borderRadius: 20,
   },
   inputContainer: {

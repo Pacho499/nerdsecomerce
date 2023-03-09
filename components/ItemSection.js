@@ -1,7 +1,7 @@
 import {View, TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {addItem} from '../store/actions/cartAction';
-import { colors } from '../utils/colors';
+import {colors} from '../utils/colors';
 const ItemSection = ({item}) => {
   const dispatch = useDispatch();
   return (
@@ -21,7 +21,7 @@ const ItemSection = ({item}) => {
 
       <TouchableOpacity onPress={() => dispatch(addItem(item))}>
         <View style={Styles.addButton}>
-          <Text style={{color:'white', fontSize:20}}>+</Text>
+          <Text style={{color: 'white', fontSize: 20}}>+</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -38,7 +38,7 @@ const Styles = StyleSheet.create({
   container: {
     borderTopWidth: 2,
     borderBottomWidth: 2,
-    borderColor:colors.mainPurple,
+    borderColor: colors.mainPurple,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
@@ -46,17 +46,17 @@ const Styles = StyleSheet.create({
   addButton: {
     padding: 10,
     backgroundColor: colors.mainPurple,
-    borderWidth:2,
-    borderColor:colors.mainBlue,
+    borderWidth: 2,
+    borderColor: colors.mainBlue,
     borderRadius: 10,
     marginLeft: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
   },
-  description:{
-    fontSize:16,
-    fontWeight:'500'
+  description: {
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 

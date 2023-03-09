@@ -25,6 +25,7 @@ const ItemSell = ({route, navigation}) => {
   const suggestedItemBytype = items.filter(
     (item) => item.type === route.params.data.type,
   );
+  
   const renderSuggestedByType = suggestedItemBytype.map((value) => {
     return (
       <ItemShopWindow
@@ -62,11 +63,15 @@ const ItemSell = ({route, navigation}) => {
         <CustomButton onPress={addItemToCart} title='Aggiungi al carrello' />
         <CustomButton onPress={openModal} title='Compra subito' />
       </View>
-      <Text style={Styles.text}>Perché hai visto prodotti {item.franchise}</Text>
+      <Text style={Styles.text}>
+        Perché hai visto prodotti {item.franchise}
+      </Text>
       <ScrollView style={Styles.suggested} horizontal={true}>
         {renderSuggestedByFranch}
       </ScrollView>
-      <Text style={Styles.text}>Perche hai visto prodotto di tipo {item.type}</Text>
+      <Text style={Styles.text}>
+        Perche hai visto prodotto di tipo {item.type}
+      </Text>
       <ScrollView horizontal={true} style={Styles.suggested}>
         {renderSuggestedByType}
       </ScrollView>
@@ -78,10 +83,10 @@ const Styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    fontSize:20,
-    marginStart:10,
-    marginVertical:10,
-    fontWeight:'500'
+    fontSize: 20,
+    marginStart: 10,
+    marginVertical: 10,
+    fontWeight: '500',
   },
   image: {
     height: 300,
@@ -90,7 +95,7 @@ const Styles = StyleSheet.create({
   },
   itemContainer: {
     justifyContent: 'center',
-    marginVertical:20,
+    marginVertical: 20,
   },
   buttonsContainer: {
     alignItems: 'center',

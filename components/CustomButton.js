@@ -1,10 +1,10 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import { colors } from '../utils/colors';
+import {colors} from '../utils/colors';
 const CustomButton = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress} style={Styles.container}>
-      <Text style={{fontSize:15, fontWeight:'600'}}>{props.title}</Text>
+      <Text style={{fontSize: 15, fontWeight: '600'}}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -19,7 +19,7 @@ const Styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 2,
     marginVertical: 10,
-    borderColor:colors.mainPurple
+    borderColor: colors.mainPurple,
   },
 });
 

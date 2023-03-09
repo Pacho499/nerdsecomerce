@@ -1,7 +1,7 @@
 import {View, TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {removeItem} from '../store/actions/cartAction';
-import { colors } from '../utils/colors';
+import {colors} from '../utils/colors';
 const ItemCart = ({item}) => {
   const dispatch = useDispatch();
   return (
@@ -21,7 +21,7 @@ const ItemCart = ({item}) => {
       </View>
       <TouchableOpacity onPress={() => dispatch(removeItem(item.item))}>
         <View style={Styles.removeButton}>
-          <Text style={{color:'white'}}>X</Text>
+          <Text style={{color: 'white'}}>X</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -41,19 +41,19 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
-    borderColor:colors.mainPurple
+    borderColor: colors.mainPurple,
   },
   removeButton: {
     padding: 10,
     backgroundColor: colors.mainPurple,
-    borderWidth:2,
-    borderColor:colors.mainBlue,
+    borderWidth: 2,
+    borderColor: colors.mainBlue,
     borderRadius: 10,
     marginLeft: 20,
   },
-  description:{
-    fontSize:16,
-    fontWeight:'500'
+  description: {
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 

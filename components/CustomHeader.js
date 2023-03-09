@@ -6,18 +6,18 @@ const CustomHeader = ({title, back, backPage}) => {
   const navigation = useNavigation();
   return (
     <View style={Style.container}>
-      {back ? <TouchableWithoutFeedback onPress={() => navigation.navigate(backPage)}>
-        <View style={Style.backButtonContainer}>
-          <Ionicons
-            name='md-arrow-back-outline'
-            color={colors.mainPurple}
-            size={25}
-          />
-          <Text style={{fontSize: 15, fontWeight: '500', color: colors.mainPurple}}>
-            Indietro
-          </Text>
-        </View>
-      </TouchableWithoutFeedback> : null}
+      {back ? (
+        <TouchableWithoutFeedback onPress={() => navigation.navigate(backPage)}>
+          <View style={Style.backButtonContainer}>
+            <Ionicons
+              name='md-arrow-back-outline'
+              color={colors.mainPurple}
+              size={25}
+            />
+            <Text style={Style.backButton}>Indietro</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      ) : null}
       <Text style={Style.title}>{title}</Text>
     </View>
   );
@@ -43,6 +43,11 @@ const Style = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 15,
     fontWeight: '500',
+  },
+  backButton: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: colors.mainPurple,
   },
 });
 export default CustomHeader;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import ItemShopWindow from './ItemShopWindow';
-import { colors } from '../utils/colors';
+import {colors} from '../utils/colors';
 
 const HomeShopWindow = ({franchiseName, navigation, itemList}) => {
   const renderItemShopWindow = itemList.map((item, index) => {
@@ -25,15 +25,15 @@ const Styles = StyleSheet.create({
     width: '90%',
     height: 260,
     marginLeft: 17,
-    borderColor:colors.secondaryBlue,
-    borderRadius:20,
-    backgroundColor:colors.mainBlue,
+    borderColor: colors.secondaryBlue,
+    borderRadius: 20,
+    backgroundColor: colors.mainBlue,
   },
   title: {
     marginTop: 10,
     fontSize: 30,
-    fontWeight:'10',
-    color:colors.secondaryPurple
+    fontWeight: '10',
+    color: colors.secondaryPurple,
   },
 });
 

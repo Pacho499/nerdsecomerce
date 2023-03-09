@@ -6,6 +6,7 @@ import SectionShopWindow from '../components/SectionShopWindow';
 const Section = (props) => {
   const items = useSelector((state) => state.ItemSell.items);
   let typeList = {};
+  //filte by type
   for (let i = 0; i < items.length; i++) {
     let type = items[i].type;
     if (!typeList.hasOwnProperty(type)) {

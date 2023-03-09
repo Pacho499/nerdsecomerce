@@ -38,11 +38,11 @@ const cartReducer = (state = initialState, action) => {
           Math.round((state.cost - action.payload.cost * quantity) * 100) / 100,
       };
     }
-    case REMOVE_ALL:{
+    case REMOVE_ALL: {
       return {
-        cost:0,
-        items:{}
-      }
+        cost: 0,
+        items: {},
+      };
     }
     default:
       return {

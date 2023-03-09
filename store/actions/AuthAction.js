@@ -6,8 +6,8 @@ const LOG_OUT = 'LOG_OUT';
 const RETRIEVE_DATA = 'RETRIEVE_DATA';
 const CHANGE_ADRESS = 'CHANGE_ADRESS';
 const CHANGE_CARD = 'CHANGE_CARD';
-const ERROR = 'ERROR'
-const ERROR_REMOVE = 'ERROR_REMOVE'
+const ERROR = 'ERROR';
+const ERROR_REMOVE = 'ERROR_REMOVE';
 
 export const signUp = (formDatas) => {
   return async (dispatch) => {
@@ -38,9 +38,8 @@ export const signUp = (formDatas) => {
       dispatch({type: SIGN_UP, firebase: data, form: formDatas});
       saveData(data.data.idToken, data.data.localId);
     } catch (error) {
-      dispatch({type:ERROR, payload: error.response.data})
+      dispatch({type: ERROR, payload: error.response.data});
     }
-    
   };
 };
 
@@ -48,22 +47,21 @@ export const logIn = (email, password) => {
   return async (dispatch) => {
     try {
       const data = await axios.post(
-      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBP82z2GcEbeoKBldyEELw2UaBHcpUqZ6U`,
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      },
-    );
-    const userDatas = await axios.get(
-      `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${data.data.localId}.json`,
-    );
-    dispatch({type: LOG_IN, firebase: data, userDatas: userDatas.data});
-    saveData(data.data.idToken, data.data.localId);
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBP82z2GcEbeoKBldyEELw2UaBHcpUqZ6U`,
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        },
+      );
+      const userDatas = await axios.get(
+        `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${data.data.localId}.json`,
+      );
+      dispatch({type: LOG_IN, firebase: data, userDatas: userDatas.data});
+      saveData(data.data.idToken, data.data.localId);
     } catch (error) {
-      dispatch({type:ERROR, payload: error.response.data})
+      dispatch({type: ERROR, payload: error.response.data});
     }
-    
   };
 };
 
@@ -90,10 +88,10 @@ export const retrieveData = () => {
   return async (dispatch) => {
     const data = await AsyncStorage.getItem('userData');
     const myData = JSON.parse(data);
-    let userDatas = {}
+    let userDatas = {};
     if (data !== null) {
       userDatas = await axios.get(
-      `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${myData.userId}.json`,
+        `https://nerdsecomerce-default-rtdb.firebaseio.com/users/${myData.userId}.json`,
       );
       dispatch({
         type: RETRIEVE_DATA,
@@ -101,8 +99,6 @@ export const retrieveData = () => {
         firebase: myData,
       });
     }
-    
-   
   };
 };
 
@@ -131,6 +127,15 @@ export const changeCard = (cardNumber, card, userId) => {
   };
 };
 
-export const removeError = () => ({type: ERROR_REMOVE})
+export const removeError = () => ({type: ERROR_REMOVE});
 
-export {SIGN_UP, LOG_IN, LOG_OUT, RETRIEVE_DATA, CHANGE_ADRESS, CHANGE_CARD, ERROR, ERROR_REMOVE};
+export {
+  SIGN_UP,
+  LOG_IN,
+  LOG_OUT,
+  RETRIEVE_DATA,
+  CHANGE_ADRESS,
+  CHANGE_CARD,
+  ERROR,
+  ERROR_REMOVE,
+};
