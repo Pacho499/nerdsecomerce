@@ -45,7 +45,6 @@ const BuyNowModal = (props) => {
       }, 3000);
     } else {
       setFormState({...formState, buyed: true, error: false});
-      dispatch(removeAll());
       setTimeout(() => {
         setFormState({
           ...formState,
