@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useDispatch, useSelector} from 'react-redux';
 import {retrieveData} from './store/actions/AuthAction';
-import { colors } from './utils/colors';
+import {colors} from './utils/colors';
 import Home from './screens/Home';
 import ItemSell from './screens/ItemSell';
 import Cart from './screens/Cart';
@@ -14,65 +14,86 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import CheckOut from './screens/Checkout';
 import SectionDetail from './screens/SectionDetail';
 import User from './screens/User';
-import { View, Text} from 'react-native';
-import { isIos } from './utils/helper';
+import {isIos} from './utils/helper';
 import CustomHeader from './components/CustomHeader';
-import CustomButton from './components/CustomButton';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const NavigationHome = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerTitleAlign:'center',
-      headerStyle:{
-        backgroundColor:colors.mainBlue
-      },
-    }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: colors.mainBlue,
+        },
+      }}
+    >
       <Stack.Screen
-        options={isIos ? {
-          title:'Home',
-        } : {
-          header: () => <CustomHeader title='Home'/>
-        }}
+        options={
+          isIos
+            ? {
+                title: 'Home',
+              }
+            : {
+                header: () => <CustomHeader title='Home' />,
+              }
+        }
         name='Home'
         component={Home}
       />
       <Stack.Screen
-        options={isIos ? 
-          ({route}) => ({title: route.params.data.title})
-          :
-          ({route}) => ({
-            header:() => <CustomHeader title={route.params.data.title} back={true} backPage={'Home'}/>
-          })
+        options={
+          isIos
+            ? ({route}) => ({title: route.params.data.title})
+            : ({route}) => ({
+                header: () => (
+                  <CustomHeader
+                    title={route.params.data.title}
+                    back={true}
+                    backPage={'Home'}
+                  />
+                ),
+              })
         }
         name='ItemDetail'
         component={ItemSell}
       />
-      <Stack.Screen 
-         options={isIos ? 
-          null
-          :
-          {
-            header:() => <CustomHeader title='CheckOut' back={true} backPage={'Cart'}/>
-          }
+      <Stack.Screen
+        options={
+          isIos
+            ? null
+            : {
+                header: () => (
+                  <CustomHeader
+                    title='CheckOut'
+                    back={true}
+                    backPage={'Cart'}
+                  />
+                ),
+              }
         }
-        name='Checkout' 
-        component={CheckOut} />
+        name='Checkout'
+        component={CheckOut}
+      />
     </Stack.Navigator>
   );
 };
 
 const NavigationSection = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerTitleAlign:'center',
-      headerStyle:{
-        backgroundColor:colors.mainBlue,
-      }
-    }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: colors.mainBlue,
+        },
+      }}
+    >
       <Stack.Screen
-        options={isIos ? {title:'Sezioni'} : 
-          {header: () => <CustomHeader title='Sezioni'/> }
+        options={
+          isIos
+            ? {title: 'Sezioni'}
+            : {header: () => <CustomHeader title='Sezioni' />}
         }
         name='SectionsHome'
         component={Section}
@@ -80,11 +101,19 @@ const NavigationSection = () => {
       <Stack.Screen
         name='SectionDetail'
         component={SectionDetail}
-        options={ isIos ? 
-          ({route}) => ({title: route.params.data[0].type}) 
-          :
-          ({route}) => ({header: () => <CustomHeader title={route.params.data[0].type} back={true} backPage='SectionsHome'/>}) 
-      }
+        options={
+          isIos
+            ? ({route}) => ({title: route.params.data[0].type})
+            : ({route}) => ({
+                header: () => (
+                  <CustomHeader
+                    title={route.params.data[0].type}
+                    back={true}
+                    backPage='SectionsHome'
+                  />
+                ),
+              })
+        }
       />
     </Stack.Navigator>
   );
@@ -120,7 +149,9 @@ const tabNavigation = () => {
               default:
                 break;
             }
-            return <Ionicons name={iconName} color={colors.mainPurple} size={20} />;
+            return (
+              <Ionicons name={iconName} color={colors.mainPurple} size={20} />
+            );
           },
           tabBarStyle: {
             backgroundColor: colors.mainBlue,
@@ -128,12 +159,14 @@ const tabNavigation = () => {
           headerStyle: {
             backgroundColor: colors.mainBlue,
           },
-          headerTitleAlign:'center',
-          tabBarLabel:() => {return null} ,
+          headerTitleAlign: 'center',
+          tabBarLabel: () => {
+            return null;
+          },
         })}
       >
         <Tab.Screen
-          options={{title:'Home', header:() => null}}
+          options={{title: 'Home', header: () => null}}
           name='HomeTab'
           component={NavigationHome}
         />
@@ -143,14 +176,18 @@ const tabNavigation = () => {
           component={Cart}
         />
         <Tab.Screen
-          options={{title:'Sezioni', header:() => null}}
+          options={{title: 'Sezioni', header: () => null}}
           name='sections'
           component={NavigationSection}
         />
         {token ? (
-          <Tab.Screen name='userSettings' component={User} options={{title:'Utente'}} />
+          <Tab.Screen
+            name='userSettings'
+            component={User}
+            options={{title: 'Utente'}}
+          />
         ) : (
-          <Tab.Screen name='user' options={{title:'LogIn'}} component={Auth} />
+          <Tab.Screen name='user' options={{title: 'LogIn'}} component={Auth} />
         )}
       </Tab.Navigator>
     </NavigationContainer>
