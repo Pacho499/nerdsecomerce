@@ -9,7 +9,8 @@ import {
   ERROR_REMOVE,
   CHANGE_ADRESS_START,
   CHANGE_CARD_START,
-  AUTH_START
+  AUTH_START,
+  RETRIEVE_CHECK_DONE,
 } from '../actions/AuthAction';
 
 const initialState = {
@@ -140,6 +141,12 @@ const authUser = (state = initialState, action) => {
       return{
         ...state,
         loading:true
+      }
+    }
+    case RETRIEVE_CHECK_DONE:{
+      return{
+        ...state,
+        loading:false
       }
     }
     default:

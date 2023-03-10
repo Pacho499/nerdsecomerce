@@ -9,6 +9,7 @@ const CHANGE_CARD = 'CHANGE_CARD';
 const CHANGE_ADRESS_START = 'CHANGE_ADRESS_START';
 const CHANGE_CARD_START = 'CHANGE_CARD_START';
 const AUTH_START = 'AUTH_START'
+const RETRIEVE_CHECK_DONE = 'RETRIEVE_CHECK_DONE'
 const ERROR = 'ERROR';
 const ERROR_REMOVE = 'ERROR_REMOVE';
 
@@ -104,6 +105,8 @@ export const retrieveData = () => {
         userDatas: userDatas.data,
         firebase: myData,
       });
+    }else{
+      dispatch({type:RETRIEVE_CHECK_DONE})
     }
   };
 };
@@ -157,5 +160,6 @@ export {
   ERROR_REMOVE,
   CHANGE_ADRESS_START,
   CHANGE_CARD_START,
-  AUTH_START
+  AUTH_START,
+  RETRIEVE_CHECK_DONE,
 };
