@@ -1,10 +1,12 @@
 import axios from 'axios';
 import Item from '../../models/itemSell';
 const FETCH_ITEMS = 'FETCH_ITEMS';
-
+const FETCH_ITEMS_START = 'FETCH_ITEMS_START'
 export const fetchItems = () => {
   return async (dispatch) => {
-    const data = await axios.get(
+    dispatch({type:FETCH_ITEMS_START})
+    try {
+      const data = await axios.get(
       'https://nerdsecomerce-default-rtdb.firebaseio.com/itemSell.json',
     );
     const itemSell = [];
@@ -22,7 +24,11 @@ export const fetchItems = () => {
       );
     }
     dispatch({type: FETCH_ITEMS, payload: itemSell});
+    } catch (error) {
+      console.log(error)
+    }
+    
   };
 };
 
-export {FETCH_ITEMS};
+export {FETCH_ITEMS, FETCH_ITEMS_START};

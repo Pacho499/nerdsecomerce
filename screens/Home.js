@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TextInput, ScrollView} from 'react-native';
+import {View, StyleSheet, TextInput, ScrollView, ActivityIndicator} from 'react-native';
 import HomeShopWindow from '../components/HomeShopWindow';
 import {fetchItems} from '../store/actions/itemSellActions';
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,6 +21,7 @@ const Home = (props) => {
     }
   }, [text]);
   const items = useSelector((state) => state.ItemSell.items);
+  const loading = useSelector((state) => state.ItemSell.loading)
   let franchiseList = {};
 
   //set the item based on their franchise
@@ -60,8 +61,7 @@ const Home = (props) => {
           />
         ) : null}
       </View>
-
-      <ScrollView>{renderHomeShop}</ScrollView>
+      <ScrollView>{loading ? <ActivityIndicator size='large' color={colors.mainBlue}/> :renderHomeShop}</ScrollView>
     </View>
   );
 };

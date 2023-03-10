@@ -1,6 +1,7 @@
-import {FETCH_ITEMS} from '../actions/itemSellActions';
+import {FETCH_ITEMS, FETCH_ITEMS_START} from '../actions/itemSellActions';
 const initialState = {
   items: [],
+  loading:false,
 };
 
 const ItemSell = (state = initialState, action) => {
@@ -9,7 +10,13 @@ const ItemSell = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload,
+        loading:false
       };
+    case FETCH_ITEMS_START:
+      return{
+        ...state,
+        loading:true
+      }
     default:
       return {
         ...state,
