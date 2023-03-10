@@ -16,6 +16,7 @@ import SectionDetail from './screens/SectionDetail';
 import User from './screens/User';
 import {isIos} from './utils/helper';
 import CustomHeader from './components/CustomHeader';
+import { ActivityIndicator, View } from 'react-native';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const NavigationHome = () => {
@@ -121,6 +122,7 @@ const NavigationSection = () => {
 
 const tabNavigation = () => {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.authUser.loading)
   useEffect(() => {
     dispatch(retrieveData());
   }, [dispatch]);
@@ -128,7 +130,12 @@ const tabNavigation = () => {
   const items = useSelector((state) => state.cartReducer.items);
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      {loading ? 
+      <View style={{justifyContent:'center', alignItems:'center', flex:1}}>
+        <ActivityIndicator size='large' color={colors.mainPurple}/> 
+      </View>
+      
+      :<Tab.Navigator
         screenOptions={({route}) => ({
           tabBarIcon: ({focused}) => {
             let iconName;
@@ -196,7 +203,7 @@ const tabNavigation = () => {
         ) : (
           <Tab.Screen name='user' options={{title: 'LogIn'}} component={Auth} />
         )}
-      </Tab.Navigator>
+      </Tab.Navigator>}
     </NavigationContainer>
   );
 };

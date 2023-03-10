@@ -8,7 +8,8 @@ import {
   ERROR,
   ERROR_REMOVE,
   CHANGE_ADRESS_START,
-  CHANGE_CARD_START
+  CHANGE_CARD_START,
+  AUTH_START
 } from '../actions/AuthAction';
 
 const initialState = {
@@ -38,6 +39,7 @@ const authUser = (state = initialState, action) => {
           city: action.form.city,
           adress: action.form.adress,
         },
+        loading:false
       };
     }
     case LOG_IN: {
@@ -48,6 +50,7 @@ const authUser = (state = initialState, action) => {
         username: action.userDatas.username,
         cardData: action.userDatas.cardData,
         adressInfo: action.userDatas.adressInfo,
+        loading:false
       };
     }
     case LOG_OUT: {
@@ -82,6 +85,7 @@ const authUser = (state = initialState, action) => {
         username: action.userDatas.username,
         cardData: action.userDatas.cardData,
         adressInfo: action.userDatas.adressInfo,
+        loading:false
       };
     }
     case ERROR: {
@@ -130,6 +134,12 @@ const authUser = (state = initialState, action) => {
         cardData:{
           loading:true
         }
+      }
+    }
+    case AUTH_START:{
+      return{
+        ...state,
+        loading:true
       }
     }
     default:

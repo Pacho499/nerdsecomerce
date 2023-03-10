@@ -6,6 +6,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import CustomButton from '../components/CustomButton';
 import {useState} from 'react';
@@ -28,6 +29,7 @@ const Auth = () => {
   const isError = useSelector((state) => state.authUser.error);
   const errorMessage = useSelector((state) => state.authUser.errorMessage);
   const [isLogIn, setIsLogIn] = useState(true);
+  const loading = useSelector((state) => state.authUser.loading)
   
   const SignUpVerification = () => {
     if(form.cardNumber.length !== 16 || form.adress.length < 1 || form.city.length < 1 || form.name.length < 1 ){
@@ -52,6 +54,7 @@ const Auth = () => {
             Iscriviti
           </Text>
         )}
+        {loading ? <ActivityIndicator size='large' color={colors.mainPurple}/> :
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
           <TextInput
             placeholder='E-mail'
@@ -124,7 +127,7 @@ const Auth = () => {
           )}
           {isError ? <Text style={Style.error}>{errorMessage}</Text> : null}
           {form.error ? <Text style={Style.error}>Tutti i campi devono essere compilati, la tua carta contiene {form.cardNumber.length} cifre</Text> : null}
-        </View>
+        </View>}
         {isLogIn ? (
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <CustomButton

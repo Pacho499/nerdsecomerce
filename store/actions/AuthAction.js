@@ -8,11 +8,13 @@ const CHANGE_ADRESS = 'CHANGE_ADRESS';
 const CHANGE_CARD = 'CHANGE_CARD';
 const CHANGE_ADRESS_START = 'CHANGE_ADRESS_START';
 const CHANGE_CARD_START = 'CHANGE_CARD_START';
+const AUTH_START = 'AUTH_START'
 const ERROR = 'ERROR';
 const ERROR_REMOVE = 'ERROR_REMOVE';
 
 export const signUp = (formDatas) => {
   return async (dispatch) => {
+    dispatch({type:AUTH_START})
     try {
       const data = await axios.post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBP82z2GcEbeoKBldyEELw2UaBHcpUqZ6U`,
@@ -47,6 +49,7 @@ export const signUp = (formDatas) => {
 
 export const logIn = (email, password) => {
   return async (dispatch) => {
+    dispatch({type:AUTH_START})
     try {
       const data = await axios.post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBP82z2GcEbeoKBldyEELw2UaBHcpUqZ6U`,
@@ -88,6 +91,7 @@ const saveData = (token, userId) => {
 
 export const retrieveData = () => {
   return async (dispatch) => {
+    dispatch({type:AUTH_START})
     const data = await AsyncStorage.getItem('userData');
     const myData = JSON.parse(data);
     let userDatas = {};
@@ -152,5 +156,6 @@ export {
   ERROR,
   ERROR_REMOVE,
   CHANGE_ADRESS_START,
-  CHANGE_CARD_START
+  CHANGE_CARD_START,
+  AUTH_START
 };
